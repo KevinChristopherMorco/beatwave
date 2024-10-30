@@ -1,0 +1,39 @@
+{
+  "artists": [
+    {
+      "name": "Justin Bieber",
+      "id": 288166,
+      "image": "https://api.deezer.com/artist/288166/image"
+    },
+    {
+      "name": "Michael Jackson",
+      "id": 259,
+      "image": "https://api.deezer.com/artist/259/image"
+    },
+    {
+      "name": "Backstreet Boys",
+      "id": 330,
+      "image": "https://api.deezer.com/artist/330/image"
+    },
+    {
+      "name": "Westlife",
+      "id": 274,
+      "image": "https://api.deezer.com/artist/274/image"
+    },
+    {
+      "name": "NSYNC",
+      "id": 520,
+      "image": "https://api.deezer.com/artist/520/image"
+    },
+    {
+      "name": "Taylor Swift",
+      "id": 12246,
+      "image": "https://api.deezer.com/artist/12246/image"
+    },
+    {
+      "name": "Sabrina Carpenter",
+      "id": 1176900,
+      "image": "https://api.deezer.com/artist/1176900/image"
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "artists": [
+    {
+      "name": "Taylor Swift",
+      "id": 12246,
+      "image": "https://api.deezer.com/artist/12246/image"
+    },
+    {
+      "name": "Bad Bunny",
+      "id": 10583405,
+      "image": "https://api.deezer.com/artist/10583405/image"
+    },
+    {
+      "name": "Drake",
+      "id": 246791,
+      "image": "https://api.deezer.com/artist/246791/image"
+    },
+    {
+      "name": "The Weeknd",
+      "id": 4050205,
+      "image": "https://api.deezer.com/artist/4050205/image"
+    },
+    {
+      "name": "Beyoncé",
+      "id": 145,
+      "image": "https://api.deezer.com/artist/145/image"
+    },
+    {
+      "name": "Ed Sheeran",
+      "id": 384236,
+      "image": "https://api.deezer.com/artist/384236/image"
+    },
+    {
+      "name": "Billie Eilish",
+      "id": 9635624,
+      "image": "https://api.deezer.com/artist/9635624/image"
+    },
+    {
+      "name": "Dua Lipa",
+      "id": 8706544,
+      "image": "https://api.deezer.com/artist/8706544/image"
+    },
+    {
+      "name": "Post Malone",
+      "id": 7543848,
+      "image": "https://api.deezer.com/artist/7543848/image"
+    },
+    {
+      "name": "Harry Styles",
+      "id": 5313805,
+      "image": "https://api.deezer.com/artist/5313805/image"
+    },
+    {
+      "name": "Olivia Rodrigo",
+      "id": 11152580,
+      "image": "https://api.deezer.com/artist/11152580/image"
+    },
+    {
+      "name": "SZA",
+      "id": 5531258,
+      "image": "https://api.deezer.com/artist/5531258/image"
+    },
+    {
+      "name": "Justin Bieber",
+      "id": 288166,
+      "image": "https://api.deezer.com/artist/288166/image"
+    },
+    {
+      "name": "J Balvin",
+      "id": 4860761,
+      "image": "https://api.deezer.com/artist/4860761/image"
+    },
+    {
+      "name": "Sam Smith",
+      "id": 1097709,
+      "image": "https://api.deezer.com/artist/1097709/image"
+    },
+    {
+      "name": "Shakira",
+      "id": 160,
+      "image": "https://api.deezer.com/artist/160/image"
+    },
+    {
+      "name": "Kendrick Lamar",
+      "id": 525046,
+      "image": "https://api.deezer.com/artist/525046/image"
+    },
+    {
+      "name": "Marshmello",
+      "id": 7890702,
+      "image": "https://api.deezer.com/artist/7890702/image"
+    },
+    {
+      "name": "Ariana Grande",
+      "id": 1562681,
+      "image": "https://api.deezer.com/artist/1562681/image"
+    },
+    {
+      "name": "Travis Scott",
+      "id": 4495513,
+      "image": "https://api.deezer.com/artist/4495513/image"
+    }
+  ]
+}

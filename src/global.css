@@ -16,6 +16,9 @@
   --brand-color-400: #ff8c4d;
   --brand-color-500: #ff6b1a;
   --brand-color-600: #e65100;
+
+  --text-color: #fff;
+  --background-color: #000;
 }
 
 @layer base {
@@ -23,9 +26,18 @@
     @apply h-full bg-white scroll-smooth;
   }
   body {
-    @apply h-full bg-black;
+    @apply h-full bg-[var(--background-color)];
   }
   #root {
-    @apply min-h-screen bg-black text-white relative p-6 flex flex-col gap-10;
+    @apply min-h-screen bg-[var(--background-color)] text-[var(--text-color)]  relative flex flex-col gap-10;
   }
+}
+
+.scrollable-content {
+  scrollbar-width: none;
+}
+
+/* For WebKit browsers */
+.scrollable-content::-webkit-scrollbar {
+  display: none;
 }

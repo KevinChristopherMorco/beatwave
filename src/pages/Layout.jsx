@@ -1,13 +1,14 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 import Header from "../components/partials/Header";
 import Tab from "../components/partials/Tab";
 
 const Layout = () => {
+  const { pathname } = useLocation();
   return (
     <>
-      <Header />
+      {pathname === "/" && <Header />}
       <main className="mb-[5rem]">
         <Outlet />
       </main>

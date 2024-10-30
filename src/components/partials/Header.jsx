@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <nav className="flex justify-between items-center">
+    <nav className="p-6 flex justify-between items-center">
       <div className="flex items-center gap-2">
         <h1 className="font-medium text-2xl tracking-tight">Good Morning</h1>
       </div>
