@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto";
+}
+
+:root {
+  --brand-color-100: #ffefe5;
+  --brand-color-200: #ffceb3;
+  --brand-color-300: #ffad80;
+  --brand-color-400: #ff8c4d;
+  --brand-color-500: #ff6b1a;
+  --brand-color-600: #e65100;
+}
+
+@layer base {
+  html {
+    @apply h-full bg-white scroll-smooth;
+  }
+  body {
+    @apply h-full bg-black;
+  }
+  #root {
+    @apply min-h-screen bg-black text-white relative p-6 flex flex-col gap-10;
+  }
+}
