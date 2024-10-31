@@ -18,7 +18,8 @@
   --brand-color-600: #e65100;
 
   --text-color: #fff;
-  --background-color: #000;
+  --background-color: #0a0a0a;
+  --background-color-neutral: #0f0d13;
 }
 
 @layer base {

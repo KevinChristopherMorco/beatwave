@@ -71,7 +71,7 @@ const FeaturedCard = ({ musicData, type }) => {
 
       {type === "albums" && (
         <Link
-          to={`artist/${musicData.id}`}
+          to={`/album/${musicData.id}`}
           className="shrink-0 px-4 flex flex-col gap-4 items-start cursor-pointer group"
         >
           <div
@@ -82,9 +82,11 @@ const FeaturedCard = ({ musicData, type }) => {
             <p className="font-medium group-hover:text-[var(--brand-color-400)] transition-colors w-40 overflow-hidden whitespace-nowrap overflow-ellipsis">
               {musicData.title}
             </p>
-            <div className="flex w-[10rem] gap-1 font-light text-gray-400 text-wrap">
-              <p className=" ">Album • {musicData.artist.name} </p>
-            </div>
+            {musicData.artist?.name && (
+              <div className="flex w-[10rem] gap-1 font-light text-gray-400 text-wrap">
+                <p>Album • {musicData.artist.name}</p>
+              </div>
+            )}
           </div>
         </Link>
       )}

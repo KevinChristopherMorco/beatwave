@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 
 import knownArtist from "../../json/known-artists.json";
 import devPicks from "../../json/developer-pick.json";
@@ -17,8 +16,6 @@ const Home = () => {
   }, []);
 
   if (isLoading) return;
-
-  console.log(musicData);
 
   return (
     <section className="p-6 flex flex-col gap-10 animate-fadeIn">

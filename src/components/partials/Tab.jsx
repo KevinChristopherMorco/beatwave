@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const Tab = () => {
   return (
-    <nav className="w-full fixed bottom-0 flex p-4 justify-evenly gap-10 items-center  bg-black bg-opacity-70">
+    <nav className="w-full fixed bottom-0 flex p-4 justify-evenly gap-10 items-center  bg-black bg-opacity-70 z-[999]">
       <Link
         to={"/"}
         className="flex flex-col gap-1 justify-center items-center"

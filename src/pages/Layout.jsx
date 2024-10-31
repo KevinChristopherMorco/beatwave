@@ -9,7 +9,7 @@ const Layout = () => {
   return (
     <>
       {pathname === "/" && <Header />}
-      <main className="mb-[5rem]">
+      <main className="flex flex-col mb-[5rem] grow">
         <Outlet />
       </main>
       <Tab />
