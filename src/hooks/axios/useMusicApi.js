@@ -22,7 +22,19 @@ const useMusicApi = () => {
     }
   };
 
-  return { musicData, isLoading, getArtistInformation };
+  const getChartInformation = async () => {
+    try {
+      const response = await axios.get(
+        `https://corsproxy.io/?https://api.deezer.com/chart`
+      );
+      setMusicData(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return { musicData, isLoading, getArtistInformation, getChartInformation };
 };
 
 export default useMusicApi;
