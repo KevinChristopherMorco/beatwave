@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import useMusicApi from "../../hooks/axios/useMusicApi";
 
@@ -15,23 +15,28 @@ import SegmentContainer from "../../components/shared/container/SegmentContainer
 import PageFloatingContainer from "../../components/shared/container/PageFloatingContainer";
 import Line from "../../components/loaders/Line";
 
-const Artist = () => {
-  const { artistID } = useParams();
-  const { musicData, isLoading, getArtistsAllData } = useMusicApi();
+const Podcast = () => {
+  const { podcastID } = useParams();
+  const { musicData, isLoading, getPodcastInformation } = useMusicApi();
 
   useEffect(() => {
-    getArtistsAllData(artistID);
+    getPodcastInformation(podcastID);
     window.scrollTo({ top: 0 });
-  }, [artistID]);
+  }, [podcastID]);
 
   if (isLoading) return <Line />;
 
+  console.log(musicData);
+
   return (
     <SectionContainer>
-      <PageHeader musicData={musicData} type={"artist"} />
-      <FloatingBackground imageURL={musicData.artist.picture_xl} />
+      <PageHeader musicData={musicData} type={"podcast"} />
+      <FloatingBackground imageURL={musicData.picture_xl} />
       <PageFloatingContainer>
-        {musicData.tracks.data.length > 0 && (
+        <p className="font-bold text-4xl">{musicData.title}</p>
+        <p>Preview not available</p>
+        <p>{musicData.description}</p>
+        {/* {musicData.tracks.data.length > 0 && (
           <>
             <div>
               <p>
@@ -53,46 +58,16 @@ const Artist = () => {
               </div>
             </SegmentContainer>
           </>
-        )}
-
-        {musicData.albums.data.data.length > 0 && (
-          <SegmentContainer>
-            <Subheading
-              title={"Popular Albums"}
-              subtext={`Most popular albums from ${musicData.artist.name}`}
-            />
-            <ScrollableContainer>
-              {musicData.albums.data.data.map((album, index) => {
-                return (
-                  <FeaturedCard key={index} musicData={album} type={"albums"} />
-                );
-              })}
-            </ScrollableContainer>
-          </SegmentContainer>
-        )}
-
-        {musicData.similar.data.length > 0 && (
-          <SegmentContainer>
-            <Subheading
-              title={"Similar Artists"}
-              subtext={`Find artists similar to ${musicData.artist.name}`}
-            />
-            <ScrollableContainer>
-              {musicData.similar.data.map((similar, index) => {
-                return (
-                  <FeaturedCard
-                    key={index}
-                    musicData={similar}
-                    type={"artists"}
-                  />
-                );
-              })}
-            </ScrollableContainer>
-          </SegmentContainer>
-        )}
+        )} */}
+        <div className="text-sm">
+          For the full podcast session sign up to deezers{" "}
+          <span className="font-bold text-[var(--brand-color-400)]">
+            <Link to={musicData.link}> here!</Link>
+          </span>
+        </div>
       </PageFloatingContainer>
     </SectionContainer>
   );
 };
 
-export default Artist;
+export default Podcast;

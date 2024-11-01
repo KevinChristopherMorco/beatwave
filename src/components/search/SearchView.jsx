@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { RiArrowLeftLine, RiSearch2Fill } from "@remixicon/react";
+import {
+  RiArrowLeftLine,
+  RiSearch2Fill,
+  RiVerifiedBadgeFill,
+} from "@remixicon/react";
 
 import useMusicApi from "../../hooks/axios/useMusicApi";
 
@@ -94,9 +98,13 @@ const SearchView = ({ setToggleSearch }) => {
                 />
 
                 <div className="py-1 flex flex-col w-full">
-                  <p className="font-medium w-[75%] overflow-hidden whitespace-nowrap overflow-ellipsis">
-                    {artist?.artist?.name}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <p className="font-medium overflow-hidden whitespace-nowrap overflow-ellipsis">
+                      {artist?.artist?.name}
+                    </p>
+                    <RiVerifiedBadgeFill className="w-4 h-4 text-[#1C9CEA]" />
+                  </div>
+
                   <div className="text-gray-400 flex gap-1 font-light text-sm">
                     <p>Artist</p>
                   </div>

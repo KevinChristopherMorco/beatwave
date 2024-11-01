@@ -3,9 +3,8 @@ import getCurrentGreeting from "../../helpers/getCurrentGreeting";
 
 const Header = () => {
   const currentGreeting = getCurrentGreeting();
-  console.log(currentGreeting);
   return (
-    <nav className="p-6 flex justify-between items-center">
+    <nav className="p-4 flex justify-between items-center">
       <div className="flex items-center gap-2">
         <h1 className="font-medium text-2xl tracking-tight">
           {currentGreeting}

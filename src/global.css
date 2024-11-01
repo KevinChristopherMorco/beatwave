@@ -7,6 +7,7 @@
   margin: 0;
   box-sizing: border-box;
   font-family: "Roboto";
+  /* border: 1px solid red; */
 }
 
 :root {
@@ -41,6 +42,10 @@
 /* For WebKit browsers */
 .scrollable-content::-webkit-scrollbar {
   display: none;
+}
+
+.brand-name {
+  font-family: "Raleway", "Roboto";
 }
 
 /*loader template credits https://cssloaders.github.io/ */
@@ -130,5 +135,46 @@
     height: 28px;
     background-position: -36px -36px;
     background-size: 80px 80px;
+  }
+}
+
+.loader-line {
+  width: 8px;
+  height: 40px;
+  border-radius: 4px;
+  display: block;
+  margin: 20px auto;
+  position: relative;
+  background: currentColor;
+  color: #ff3d00;
+  box-sizing: border-box;
+  animation: animloader-line 0.3s 0.3s linear infinite alternate;
+}
+
+.loader-line::after,
+.loader-line::before {
+  content: "";
+  width: 8px;
+  height: 40px;
+  border-radius: 4px;
+  background: currentColor;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 20px;
+  box-sizing: border-box;
+  animation: animloader-line 0.3s 0.45s linear infinite alternate;
+}
+.loader-line::before {
+  left: -20px;
+  animation-delay: 0s;
+}
+
+@keyframes animloader-line {
+  0% {
+    height: 48px;
+  }
+  100% {
+    height: 4px;
   }
 }

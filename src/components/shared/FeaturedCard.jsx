@@ -38,16 +38,26 @@ const FeaturedCard = ({ musicData, type }) => {
           <div class="absolute inset-0 bg-black opacity-40"></div>
 
           <div className="relative flex gap-1">
-            <img
-              src={musicData.artist.picture_xl}
-              alt=""
-              className="w-[4rem] h-[4rem] rounded-lg"
-            />
+            <Link
+              to={`/artist/${musicData.artist.id}`}
+              className="cursor-pointer"
+            >
+              <img
+                src={musicData.artist.picture_xl}
+                alt=""
+                className="w-[4rem] h-[4rem] rounded-lg"
+              />
+            </Link>
             <div className="flex flex-col py-1 px-2">
               <p className="text-lg font-bold">{musicData.title}</p>
               <div className="flex gap-1">
                 <p className="font-light">Singer •</p>
-                <p className="font-light">{musicData.artist.name}</p>
+                <Link
+                  to={`/artist/${musicData.artist.id}`}
+                  className="font-light cursor-pointer hover:text-[var(--brand-color-500)] transition-colors"
+                >
+                  {musicData.artist.name}
+                </Link>
               </div>
             </div>
           </div>
@@ -65,7 +75,7 @@ const FeaturedCard = ({ musicData, type }) => {
 
       {type === "podcasts" && (
         <Link
-          to={`artist/${musicData.id}`}
+          to={`/podcast/${musicData.id}`}
           className="shrink-0 px-4 flex flex-col gap-4 items-start cursor-pointer group"
         >
           <div

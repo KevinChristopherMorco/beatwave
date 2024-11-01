@@ -6,11 +6,13 @@ const SectionContainer = ({ children }) => {
   return (
     <>
       {pathname === "/" ? (
-        <section className="p-6 flex flex-col gap-10 animate-fadeIn">
+        <section className="p-4 flex flex-col gap-10 animate-fadeIn lg:col-span-2 lg:col-start-2">
           {children}
         </section>
       ) : (
-        <section className="relative bg-center grow">{children}</section>
+        <section className="relative bg-center grow lg:col-span-2 lg:col-start-2">
+          {children}
+        </section>
       )}
     </>
   );

@@ -15,6 +15,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
+    "typeface-raleway": "^1.1.13",
     "typeface-roboto": "^1.1.13"
   },
   "devDependencies": {

@@ -46,6 +46,33 @@ const useMusicApi = () => {
     }
   };
 
+  const getPodcastInformation = async (id) => {
+    try {
+      setLoading(true);
+
+      const response = await axios.get(
+        `https://corsproxy.io/?https://api.deezer.com/podcast/${id}`
+      );
+      setMusicData(response.data);
+
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getGenre = async () => {
+    try {
+      const response = await axios.get(
+        `https://corsproxy.io/?https://api.deezer.com/genre`
+      );
+      setMusicData(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const getSearchResults = async (query) => {
     try {
       const response = await axios.get(
@@ -96,6 +123,8 @@ const useMusicApi = () => {
     getArtistInformation,
     getChartInformation,
     getAlbumInformation,
+    getPodcastInformation,
+    getGenre,
     getSearchResults,
     getArtistsAllData,
   };

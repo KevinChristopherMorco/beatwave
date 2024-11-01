@@ -20,7 +20,7 @@ const MusicCard = ({ music }) => {
                 return (
                   <p
                     key={index}
-                    className="w-fit font-light text-gray-400 w-full overflow-hidden whitespace-nowrap overflow-ellipsis"
+                    className="w-fit font-light text-gray-400  overflow-hidden whitespace-nowrap overflow-ellipsis"
                   >
                     {contributors.name}
                   </p>
@@ -28,7 +28,7 @@ const MusicCard = ({ music }) => {
               })}
             </div>
           ) : (
-            <p className="w-fit font-light text-gray-400 w-full overflow-hidden whitespace-nowrap overflow-ellipsis">
+            <p className="w-fit font-light text-gray-400  overflow-hidden whitespace-nowrap overflow-ellipsis">
               {music.artist.name}
             </p>
           )}

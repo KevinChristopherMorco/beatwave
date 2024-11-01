@@ -19,6 +19,8 @@ const Home = () => {
 
   if (isLoading) return;
 
+  console.log(musicData);
+
   return (
     <SectionContainer>
       <FeaturedContainer>
@@ -43,13 +45,13 @@ const Home = () => {
       </FeaturedContainer>
       <FeaturedContainer>
         <MainHeading title={"Hottest Albums"} />
-        <div className="scrollable-content flex -mx-6 overflow-x-scroll">
+        <ScrollableContainer>
           {musicData.albums.data.map((album, index) => {
             return (
               <FeaturedCard key={index} musicData={album} type={"albums"} />
             );
           })}
-        </div>
+        </ScrollableContainer>
       </FeaturedContainer>
       <FeaturedContainer>
         <MainHeading title={"Listener's Favorites"} />
@@ -63,9 +65,13 @@ const Home = () => {
       </FeaturedContainer>
       <FeaturedContainer>
         <MainHeading title={"Trending Tracks"} />
-        {musicData.tracks.data.map((music, index) => {
-          return <FeaturedCard key={index} musicData={music} type={"tracks"} />;
-        })}
+        <div className="grid md:grid-cols-2 gap-10">
+          {musicData.tracks.data.map((music, index) => {
+            return (
+              <FeaturedCard key={index} musicData={music} type={"tracks"} />
+            );
+          })}
+        </div>
       </FeaturedContainer>
     </SectionContainer>
   );

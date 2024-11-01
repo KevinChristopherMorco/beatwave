@@ -7,7 +7,7 @@ const BackButton = () => {
 
   return (
     <div
-      className="relative bg-gray-500 bg-opacity-20 w-10 h-10 flex items-center justify-center rounded-full"
+      className="relative bg-gray-500 bg-opacity-20 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer"
       onClick={() => navigate(-1)}
     >
       <RiArrowLeftLine className="w-6 h-6" />
