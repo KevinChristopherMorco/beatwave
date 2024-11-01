@@ -7,25 +7,30 @@ import FeaturedCard from "../../components/shared/FeaturedCard";
 import Subheading from "../../components/shared/heading/Subheading";
 import MusicCard from "../../components/shared/MusicCard";
 import PageHeader from "../../components/shared/PageHeader";
+import SectionContainer from "../../components/shared/container/SectionContainer";
+import FloatingBackground from "../../components/shared/page/FloatingBackground";
+import ScrollableContainer from "../../components/shared/container/ScrollableContainer";
+import Pulse from "../../components/loaders/Pulse";
 
 const Artist = () => {
   const { artistID } = useParams();
-  const { musicData, isLoading, getArtistInformation, getArtistsAllData } =
-    useMusicApi();
+  const { musicData, isLoading, getArtistsAllData } = useMusicApi();
 
   useEffect(() => {
     getArtistsAllData(artistID);
-  }, []);
+    window.scrollTo({ top: 0 });
+  }, [artistID]);
 
-  if (isLoading) return;
+  console.log(isLoading);
+
+  if (isLoading) return <Pulse />;
+
+  console.log(musicData);
 
   return (
-    <section className="relative bg-center grow">
+    <SectionContainer>
       <PageHeader musicData={musicData} type={"artist"} />
-      <div
-        className="top-0 bg-cover bg-center fixed h-[50vh] w-full"
-        style={{ backgroundImage: `url(${musicData.artist.picture_xl})` }}
-      />
+      <FloatingBackground imageURL={musicData.artist.picture_xl} />
       <div className="p-6 relative z-[99] grow flex flex-col gap-5 bg-[var(--background-color)]">
         <div>
           <p>
@@ -58,8 +63,25 @@ const Artist = () => {
             })}
           </div>
         </div>
+        <div className="flex flex-col gap-8">
+          <Subheading
+            title={"Similar Artists"}
+            subtext={`Find artists similar to ${musicData.artist.name}`}
+          />
+          <ScrollableContainer>
+            {musicData.similar.data.map((similar, index) => {
+              return (
+                <FeaturedCard
+                  key={index}
+                  musicData={similar}
+                  type={"artists"}
+                />
+              );
+            })}
+          </ScrollableContainer>
+        </div>
       </div>
-    </section>
+    </SectionContainer>
   );
 };
 

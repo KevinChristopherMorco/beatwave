@@ -1,10 +1,15 @@
 import React from "react";
+import getCurrentGreeting from "../../helpers/getCurrentGreeting";
 
 const Header = () => {
+  const currentGreeting = getCurrentGreeting();
+  console.log(currentGreeting);
   return (
     <nav className="p-6 flex justify-between items-center">
       <div className="flex items-center gap-2">
-        <h1 className="font-medium text-2xl tracking-tight">Good Morning</h1>
+        <h1 className="font-medium text-2xl tracking-tight">
+          {currentGreeting}
+        </h1>
       </div>
       <div className="flex gap-3 items-center">
         {/* <RiSunFill className="w-5 h-5" />

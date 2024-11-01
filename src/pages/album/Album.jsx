@@ -5,8 +5,11 @@ import useMusicApi from "../../hooks/axios/useMusicApi";
 
 import Subheading from "../../components/shared/heading/Subheading";
 import MusicCard from "../../components/shared/MusicCard";
-import ArtistHeader from "../../components/artist/ArtistHeader";
 import PageHeader from "../../components/shared/PageHeader";
+import SectionContainer from "../../components/shared/container/SectionContainer";
+import FloatingBackground from "../../components/shared/page/FloatingBackground";
+import Pulse from "../../components/loaders/Pulse";
+import ScrollableContainer from "../../components/shared/container/ScrollableContainer";
 
 const Album = () => {
   const { albumID } = useParams();
@@ -18,16 +21,13 @@ const Album = () => {
     getAlbumInformation(albumID);
   }, []);
 
-  if (isLoading) return;
+  if (isLoading) return <Pulse />;
 
   return (
-    <section className="relative bg-center grow">
-      {/* <ArtistHeader musicData={musicData.artist} /> */}
+    <SectionContainer>
       <PageHeader musicData={musicData} type={"album"} />
-      <div
-        className="top-0 bg-cover bg-center fixed h-[50vh] w-full"
-        style={{ backgroundImage: `url(${musicData.cover_xl})` }}
-      />
+      <FloatingBackground imageURL={musicData.cover_xl} />
+
       <div className="p-6 relative z-[99] grow flex flex-col gap-5 bg-[var(--background-color)]">
         <div className="flex flex-col gap-4">
           <h1 className="text-4xl font-medium">{musicData.title}</h1>
@@ -67,8 +67,26 @@ const Album = () => {
             </button>
           </div>
         </div>
+
+        <div className="flex flex-col gap-8">
+          <Subheading
+            title={"Similar Artists"}
+            subtext={`Find artists similar to ${musicData.artist.name}`}
+          />
+          {/* <ScrollableContainer>
+            {musicData.similar.data.map((similar, index) => {
+              return (
+                <FeaturedCard
+                  key={index}
+                  musicData={similar}
+                  type={"artists"}
+                />
+              );
+            })}
+          </ScrollableContainer> */}
+        </div>
       </div>
-    </section>
+    </SectionContainer>
   );
 };
 

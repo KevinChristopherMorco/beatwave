@@ -1,23 +1,32 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RiPlayFill, RiVolumeUpLine } from "@remixicon/react";
 
 const FeaturedCard = ({ musicData, type }) => {
+  const navigate = useNavigate();
+  const handleLinkClick = () => {
+    // Change the URL without reloading the page
+    navigate(`/artist/${musicData.id}`);
+  };
   return (
     <>
       {type === "artists" && (
-        <Link
-          to={`artist/${musicData.id}`}
+        <div
+          onClick={handleLinkClick}
           className="shrink-0 px-4 flex flex-col gap-4 items-center cursor-pointer group"
         >
           <div
             className="w-[10rem] h-[10rem] bg-cover bg-center rounded-full border border-gray-800"
-            style={{ backgroundImage: `url(${musicData.image})` }}
+            style={{
+              backgroundImage: `url(${
+                musicData.image || musicData.picture_xl
+              })`,
+            }}
           ></div>
           <p className="font-medium group-hover:text-[var(--brand-color-400)] transition-colors">
             {musicData.name}
           </p>
-        </Link>
+        </div>
       )}
       {type === "tracks" && (
         <div

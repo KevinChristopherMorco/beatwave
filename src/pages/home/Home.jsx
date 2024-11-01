@@ -7,6 +7,8 @@ import useMusicApi from "../../hooks/axios/useMusicApi";
 import FeaturedCard from "../../components/shared/FeaturedCard";
 import MainHeading from "../../components/shared/heading/MainHeading";
 import FeaturedContainer from "../../components/shared/container/FeaturedContainer";
+import ScrollableContainer from "../../components/shared/container/ScrollableContainer";
+import SectionContainer from "../../components/shared/container/SectionContainer";
 
 const Home = () => {
   const { musicData, isLoading, getChartInformation } = useMusicApi();
@@ -18,26 +20,26 @@ const Home = () => {
   if (isLoading) return;
 
   return (
-    <section className="p-6 flex flex-col gap-10 animate-fadeIn">
+    <SectionContainer>
       <FeaturedContainer>
         <MainHeading title={"Popular Artists"} />
-        <div className="scrollable-content  flex -mx-6 overflow-x-scroll">
+        <ScrollableContainer>
           {knownArtist.artists.map((artist, index) => {
             return (
               <FeaturedCard key={index} musicData={artist} type={"artists"} />
             );
           })}
-        </div>
+        </ScrollableContainer>
       </FeaturedContainer>
       <FeaturedContainer>
         <MainHeading title={"Editor's Pick"} />
-        <div className="scrollable-content  flex -mx-6 overflow-x-scroll">
+        <ScrollableContainer>
           {devPicks.artists.map((artist, index) => {
             return (
               <FeaturedCard key={index} musicData={artist} type={"artists"} />
             );
           })}
-        </div>
+        </ScrollableContainer>
       </FeaturedContainer>
       <FeaturedContainer>
         <MainHeading title={"Hottest Albums"} />
@@ -51,13 +53,13 @@ const Home = () => {
       </FeaturedContainer>
       <FeaturedContainer>
         <MainHeading title={"Listener's Favorites"} />
-        <div className="scrollable-content flex -mx-6 overflow-x-scroll">
+        <ScrollableContainer>
           {musicData.podcasts.data.map((podcast, index) => {
             return (
               <FeaturedCard key={index} musicData={podcast} type={"podcasts"} />
             );
           })}
-        </div>
+        </ScrollableContainer>
       </FeaturedContainer>
       <FeaturedContainer>
         <MainHeading title={"Trending Tracks"} />
@@ -65,7 +67,7 @@ const Home = () => {
           return <FeaturedCard key={index} musicData={music} type={"tracks"} />;
         })}
       </FeaturedContainer>
-    </section>
+    </SectionContainer>
   );
 };
 
