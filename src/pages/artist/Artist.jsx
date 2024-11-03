@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import useMusicApi from "../../hooks/axios/useMusicApi";
+import useSlice from "../../hooks/useSlice";
 
 import FeaturedCard from "../../components/shared/FeaturedCard";
 import Subheading from "../../components/shared/heading/Subheading";
@@ -14,10 +15,12 @@ import Pulse from "../../components/loaders/Pulse";
 import SegmentContainer from "../../components/shared/container/SegmentContainer";
 import PageFloatingContainer from "../../components/shared/container/PageFloatingContainer";
 import Line from "../../components/loaders/Line";
+import ViewMoreButton from "../../components/shared/buttons/ViewMoreButton";
 
 const Artist = () => {
   const { artistID } = useParams();
   const { musicData, isLoading, getArtistsAllData } = useMusicApi();
+  const { slice, handleViewItems } = useSlice();
 
   useEffect(() => {
     getArtistsAllData(artistID);
@@ -42,15 +45,18 @@ const Artist = () => {
             <SegmentContainer>
               <Subheading title={"Artist's top tracks"} />
               <div className="flex flex-col gap-4">
-                {musicData.tracks.data.slice(0, 14).map((music, index) => {
+                {musicData.tracks.data.slice(0, slice).map((music, index) => {
                   return <MusicCard key={index} music={music} />;
                 })}
               </div>
-              <div className="flex items-center justify-center">
-                <button className="w-full border p-2 rounded-md hover:bg-[var(--background-color-neutral)] transition-colors">
-                  See more tracks
-                </button>
-              </div>
+
+              <ViewMoreButton
+                slice={slice}
+                length={musicData.tracks.data.length}
+                maximizeText={"View more tracks"}
+                collapseText={"Minimize tracks"}
+                handleViewItems={handleViewItems}
+              />
             </SegmentContainer>
           </>
         )}

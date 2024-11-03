@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import useMusicApi from "../../hooks/axios/useMusicApi";
+import useSlice from "../../hooks/useSlice";
 
 import Subheading from "../../components/shared/heading/Subheading";
 import MusicCard from "../../components/shared/MusicCard";
@@ -13,10 +14,12 @@ import ScrollableContainer from "../../components/shared/container/ScrollableCon
 import PageFloatingContainer from "../../components/shared/container/PageFloatingContainer";
 import SegmentContainer from "../../components/shared/container/SegmentContainer";
 import Line from "../../components/loaders/Line";
+import ViewMoreButton from "../../components/shared/buttons/ViewMoreButton";
 
 const Album = () => {
   const { albumID } = useParams();
   const { musicData, isLoading, getAlbumInformation } = useMusicApi();
+  const { slice, handleViewItems } = useSlice();
 
   useEffect(() => {
     getAlbumInformation(albumID);
@@ -63,15 +66,25 @@ const Album = () => {
         <SegmentContainer>
           <Subheading title={"Album Tracks"} />
           <div className="flex flex-col gap-4">
-            {musicData.tracks.data.slice(0, 14).map((music, index) => {
+            {musicData.tracks.data.slice(0, slice).map((music, index) => {
               return <MusicCard key={index} music={music} />;
             })}
           </div>
-          <div className="flex items-center justify-center">
-            <button className="w-full border p-2 rounded-md hover:bg-[var(--background-color-neutral)] transition-colors">
+          {/* <div className="flex items-center justify-center">
+            <button
+              onClick={() => handleViewItems(musicData.tracks.data.length)}
+              className="w-full border p-2 rounded-md hover:bg-[var(--background-color-neutral)] transition-colors"
+            >
               See more tracks
             </button>
-          </div>
+          </div> */}
+          <ViewMoreButton
+            slice={slice}
+            length={musicData.tracks.data.length}
+            maximizeText={"View more albums"}
+            collapseText={"Minimize albums"}
+            handleViewItems={handleViewItems}
+          />
         </SegmentContainer>
 
         {/* <SegmentContainer>

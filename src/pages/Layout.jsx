@@ -10,13 +10,13 @@ import Sidebar from "../components/partials/Sidebar";
 const Layout = () => {
   const { pathname } = useLocation();
   const {
-    screenSize: { sm, md },
+    screenSize: { sm, md, lg, xl, xxl },
   } = useScreenResponsiveness();
   return (
     <>
       {pathname === "/" && (sm || md) && <Header />}
       <main className="flex flex-col mb-[5rem] grow lg:w-full lg:grid lg:grid-cols-[1fr_4fr]">
-        <Sidebar />
+        {(lg || xl || xxl) && <Sidebar />}
         <Outlet />
       </main>
       {(sm || md) && <Tab />}

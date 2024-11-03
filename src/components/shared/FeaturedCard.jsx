@@ -35,7 +35,7 @@ const FeaturedCard = ({ musicData, type }) => {
           }}
           className="relative flex flex-col gap-44 w-full h-[20rem] bg-cover bg-center rounded-md p-3"
         >
-          <div class="absolute inset-0 bg-black opacity-40"></div>
+          <div className="absolute inset-0 bg-black opacity-40"></div>
 
           <div className="relative flex gap-1">
             <Link
