@@ -15,42 +15,47 @@ import PageFloatingContainer from "../../components/shared/container/PageFloatin
 import SegmentContainer from "../../components/shared/container/SegmentContainer";
 import Line from "../../components/loaders/Line";
 import ViewMoreButton from "../../components/shared/buttons/ViewMoreButton";
+import FeaturedCard from "../../components/shared/FeaturedCard";
 
 const Album = () => {
   const { albumID } = useParams();
-  const { musicData, isLoading, getAlbumInformation } = useMusicApi();
+  const { musicData, isLoading, getAlbumAllData } = useMusicApi();
   const { slice, handleViewItems } = useSlice();
 
   useEffect(() => {
-    getAlbumInformation(albumID);
+    getAlbumAllData(albumID);
   }, []);
 
   if (isLoading) return <Line />;
 
+  console.log(musicData);
+
   return (
     <SectionContainer>
       <PageHeader musicData={musicData} type={"album"} />
-      <FloatingBackground imageURL={musicData.cover_xl} />
+      <FloatingBackground imageURL={musicData.albumInformation.cover_xl} />
       <PageFloatingContainer>
         <div className="flex flex-col gap-4">
-          <h1 className="text-4xl font-medium">{musicData.title}</h1>
+          <h1 className="text-4xl font-medium">
+            {musicData.albumInformation.title}
+          </h1>
           <div className="flex items-center justify-between">
             <Link
-              to={`/artist/${musicData.artist.id}`}
+              to={`/artist/${musicData.albumInformation.artist.id}`}
               className="flex items-center gap-2 group"
             >
               <img
-                src={musicData.artist.picture_xl}
+                src={musicData.albumInformation.artist.picture_xl}
                 className="w-8 h-8 rounded-full font-medium"
-                alt={musicData.artist.name}
+                alt={musicData.albumInformation.artist.name}
               />
               <p className="group-hover:text-[var(--brand-color-500)] transition-colors">
-                {musicData.artist.name}
+                {musicData.albumInformation.artist.name}
               </p>
             </Link>
             <div>
               <p className="font-light text-gray-400">
-                ({musicData.release_date})
+                ({musicData.albumInformation.release_date})
               </p>
             </div>
           </div>
@@ -58,42 +63,56 @@ const Album = () => {
         <div>
           <p>
             Listen to the album{" "}
-            <span className="font-medium">'{musicData.title}'</span> by{" "}
-            {musicData.artist.name}
+            <span className="font-medium">
+              '{musicData.albumInformation.title}'
+            </span>{" "}
+            by {musicData.albumInformation.artist.name}
           </p>
         </div>
 
         <SegmentContainer>
           <Subheading title={"Album Tracks"} />
           <div className="flex flex-col gap-4">
-            {musicData.tracks.data.slice(0, slice).map((music, index) => {
-              return <MusicCard key={index} music={music} />;
-            })}
+            {musicData.albumInformation.tracks.data
+              .slice(0, slice)
+              .map((music, index) => {
+                return <MusicCard key={index} music={music} />;
+              })}
           </div>
-          {/* <div className="flex items-center justify-center">
-            <button
-              onClick={() => handleViewItems(musicData.tracks.data.length)}
-              className="w-full border p-2 rounded-md hover:bg-[var(--background-color-neutral)] transition-colors"
-            >
-              See more tracks
-            </button>
-          </div> */}
           <ViewMoreButton
             slice={slice}
-            length={musicData.tracks.data.length}
+            length={musicData.albumInformation.tracks.data.length}
             maximizeText={"View more albums"}
             collapseText={"Minimize albums"}
             handleViewItems={handleViewItems}
           />
         </SegmentContainer>
 
-        {/* <SegmentContainer>
+        <SegmentContainer>
           <Subheading
-            title={"Similar Artists"}
-            subtext={`Find artists similar to ${musicData.artist.name}`}
+            title={"Similar Albums"}
+            subtext={`Find albums similar to ${musicData.albumInformation.title}`}
+          />
+          {/* <ScrollableContainer>
+            {musicData.albumInformation.similar.data.map((similar, index) => {
+              return (
+                <FeaturedCard
+                  key={index}
+                  musicData={similar}
+                  type={"artists"}
+                />
+              );
+            })}
+          </ScrollableContainer> */}
+        </SegmentContainer>
+
+        <SegmentContainer>
+          <Subheading
+            title={"Similar Arists"}
+            subtext={`Find albums similar to ${musicData.albumInformation.artist.name}`}
           />
           <ScrollableContainer>
-            {musicData.similar.data.map((similar, index) => {
+            {musicData.similarArtists.data.map((similar, index) => {
               return (
                 <FeaturedCard
                   key={index}
@@ -103,7 +122,7 @@ const Album = () => {
               );
             })}
           </ScrollableContainer>
-        </SegmentContainer> */}
+        </SegmentContainer>
       </PageFloatingContainer>
     </SectionContainer>
   );

@@ -39,6 +39,7 @@ const useMusicApi = () => {
       const response = await axios.get(
         `https://corsproxy.io/?https://api.deezer.com/album/${id}`
       );
+
       setMusicData(response.data);
       setLoading(false);
     } catch (error) {
@@ -117,6 +118,30 @@ const useMusicApi = () => {
     }
   };
 
+  const getAlbumAllData = async (id) => {
+    try {
+      setLoading(true);
+
+      const album = await axios.get(
+        `https://corsproxy.io/?https://api.deezer.com/album/${id}`
+      );
+
+      const similarArtists = await axios.get(
+        `https://corsproxy.io/?https://api.deezer.com/artist/${album.data.artist.id}/related`
+      );
+
+      const appendData = {
+        albumInformation: album.data,
+        similarArtists: similarArtists.data,
+      };
+
+      setMusicData(appendData);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return {
     musicData,
     isLoading,
@@ -127,6 +152,7 @@ const useMusicApi = () => {
     getGenre,
     getSearchResults,
     getArtistsAllData,
+    getAlbumAllData,
   };
 };
 
