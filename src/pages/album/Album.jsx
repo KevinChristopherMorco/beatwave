@@ -74,12 +74,12 @@ const Album = () => {
           </div>
         </SegmentContainer>
 
-        <SegmentContainer>
+        {/* <SegmentContainer>
           <Subheading
             title={"Similar Artists"}
             subtext={`Find artists similar to ${musicData.artist.name}`}
           />
-          {/* <ScrollableContainer>
+          <ScrollableContainer>
             {musicData.similar.data.map((similar, index) => {
               return (
                 <FeaturedCard
@@ -89,8 +89,8 @@ const Album = () => {
                 />
               );
             })}
-          </ScrollableContainer> */}
-        </SegmentContainer>
+          </ScrollableContainer>
+        </SegmentContainer> */}
       </PageFloatingContainer>
     </SectionContainer>
   );
