@@ -126,6 +126,10 @@ const useMusicApi = () => {
         `https://corsproxy.io/?https://api.deezer.com/album/${id}`
       );
 
+      const artistAlbum = await axios.get(
+        `https://corsproxy.io/?https://api.deezer.com/artist/${album.data.artist.id}/albums`
+      );
+
       const similarArtists = await axios.get(
         `https://corsproxy.io/?https://api.deezer.com/artist/${album.data.artist.id}/related`
       );
@@ -133,6 +137,7 @@ const useMusicApi = () => {
       const appendData = {
         albumInformation: album.data,
         similarArtists: similarArtists.data,
+        artistAlbum: artistAlbum.data,
       };
 
       setMusicData(appendData);

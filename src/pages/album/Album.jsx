@@ -88,6 +88,22 @@ const Album = () => {
           />
         </SegmentContainer>
 
+        {musicData.artistAlbum.data.length > 0 && (
+          <SegmentContainer>
+            <Subheading
+              title={"Popular Albums"}
+              subtext={`Most popular albums from ${musicData.albumInformation.artist.name}`}
+            />
+            <ScrollableContainer>
+              {musicData.artistAlbum.data.map((album, index) => {
+                return (
+                  <FeaturedCard key={index} musicData={album} type={"albums"} />
+                );
+              })}
+            </ScrollableContainer>
+          </SegmentContainer>
+        )}
+
         <SegmentContainer>
           <Subheading
             title={"Similar Albums"}
