@@ -1,31 +1,40 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { RiPlayFill, RiVolumeUpLine } from "@remixicon/react";
 
-const FeaturedCard = ({ musicData, type }) => {
+import useScreenResponsiveness from "../../hooks/useScreenResponsiveness";
+import useMusicApi from "../../hooks/axios/useMusicApi";
+
+const FeaturedCard = ({ musicData, type, handlePlayAudio }) => {
   const navigate = useNavigate();
+  const {
+    screenSize: { sm, md, lg, xl, xxl },
+  } = useScreenResponsiveness();
   const handleLinkClick = () => {
     // Change the URL without reloading the page
     navigate(`/artist/${musicData.id}`);
   };
+
   return (
     <>
       {type === "artists" && (
         <div
           onClick={handleLinkClick}
-          className="shrink-0 px-4 flex flex-col gap-4 items-center cursor-pointer group"
+          className="group flex shrink-0 cursor-pointer flex-col items-center gap-4 px-4 lg:px-0"
         >
           <div
-            className="w-[10rem] h-[10rem] bg-cover bg-center rounded-full border border-gray-800"
+            className="h-[10rem] w-[10rem] rounded-full border border-gray-800 bg-cover bg-center xl:h-[14rem] xl:w-[14rem]"
             style={{
               backgroundImage: `url(${
                 musicData.image || musicData.picture_xl
               })`,
             }}
           ></div>
-          <p className="font-medium group-hover:text-[var(--brand-color-400)] transition-colors">
-            {musicData.name}
-          </p>
+          <div>
+            <p className="font-medium transition-colors group-hover:text-[var(--brand-color-400)] xl:text-lg">
+              {musicData.name}
+            </p>
+          </div>
         </div>
       )}
       {type === "tracks" && (
@@ -33,7 +42,7 @@ const FeaturedCard = ({ musicData, type }) => {
           style={{
             backgroundImage: `url(${musicData.album.cover_xl})`,
           }}
-          className="relative flex flex-col gap-44 w-full h-[20rem] bg-cover bg-center rounded-md p-3"
+          className="relative flex h-[20rem] w-full flex-col gap-44 rounded-md bg-cover bg-center p-3"
         >
           <div className="absolute inset-0 bg-black opacity-40"></div>
 
@@ -45,29 +54,32 @@ const FeaturedCard = ({ musicData, type }) => {
               <img
                 src={musicData.artist.picture_xl}
                 alt=""
-                className="w-[4rem] h-[4rem] rounded-lg"
+                className="h-[4rem] w-[4rem] rounded-lg"
               />
             </Link>
-            <div className="flex flex-col py-1 px-2">
+            <div className="flex flex-col px-2 py-1">
               <p className="text-lg font-bold">{musicData.title}</p>
               <div className="flex gap-1">
                 <p className="font-light">Singer •</p>
                 <Link
                   to={`/artist/${musicData.artist.id}`}
-                  className="font-light cursor-pointer hover:text-[var(--brand-color-500)] transition-colors"
+                  className="cursor-pointer font-light transition-colors hover:text-[var(--brand-color-500)]"
                 >
                   {musicData.artist.name}
                 </Link>
               </div>
             </div>
           </div>
-          <div className="relative flex justify-between items-center">
-            <div className="flex items-center gap-2 bg-black bg-opacity-50 px-4 py-2 rounded-full">
-              <RiVolumeUpLine className="w-5 h-5" />
+          <div className="absolute bottom-4 left-0 flex w-full items-center justify-between px-4">
+            <div className="flex items-center gap-2 rounded-full bg-black bg-opacity-50 px-4 py-2">
+              <RiVolumeUpLine className="h-5 w-5" />
               <p className="text-sm font-light">See more tracks</p>
             </div>
-            <div className="bg-white w-12 h-12 rounded-full flex items-center justify-center">
-              <RiPlayFill className="w-7 h-7 text-black" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white">
+              <RiPlayFill
+                className="h-7 w-7 text-black"
+                onClick={() => handlePlayAudio(musicData.preview)}
+              />
             </div>
           </div>
         </div>
@@ -76,13 +88,13 @@ const FeaturedCard = ({ musicData, type }) => {
       {type === "podcasts" && (
         <Link
           to={`/podcast/${musicData.id}`}
-          className="shrink-0 px-4 flex flex-col gap-4 items-start cursor-pointer group"
+          className="group flex shrink-0 cursor-pointer flex-col items-start gap-4 px-4"
         >
           <div
-            className="w-[10rem] h-[10rem] bg-cover bg-center rounded-md border border-gray-800"
+            className="h-[10rem] w-[10rem] rounded-md border border-gray-800 bg-cover bg-center xl:h-[14rem] xl:w-[14rem]"
             style={{ backgroundImage: `url(${musicData.picture_xl})` }}
           ></div>
-          <p className="font-medium group-hover:text-[var(--brand-color-400)] transition-colors w-32 overflow-hidden whitespace-nowrap overflow-ellipsis">
+          <p className="w-32 overflow-hidden overflow-ellipsis whitespace-nowrap font-medium transition-colors group-hover:text-[var(--brand-color-400)] xl:w-48">
             {musicData.title}
           </p>
         </Link>
@@ -91,18 +103,18 @@ const FeaturedCard = ({ musicData, type }) => {
       {type === "albums" && (
         <Link
           to={`/album/${musicData.id}`}
-          className="shrink-0 px-4 flex flex-col gap-4 items-start cursor-pointer group"
+          className="group flex shrink-0 cursor-pointer flex-col items-start gap-4 px-4"
         >
           <div
-            className="w-[10rem] h-[10rem] bg-cover bg-center rounded-md border border-gray-800"
+            className="h-[10rem] w-[10rem] rounded-md border border-gray-800 bg-cover bg-center xl:h-[14rem] xl:w-[14rem]"
             style={{ backgroundImage: `url(${musicData.cover_xl})` }}
           ></div>
           <div className="flex flex-col">
-            <p className="font-medium group-hover:text-[var(--brand-color-400)] transition-colors w-40 overflow-hidden whitespace-nowrap overflow-ellipsis">
+            <p className="w-40 overflow-hidden overflow-ellipsis whitespace-nowrap font-medium transition-colors group-hover:text-[var(--brand-color-400)]">
               {musicData.title}
             </p>
             {musicData.artist?.name && (
-              <div className="flex w-[10rem] gap-1 font-light text-gray-400 text-wrap">
+              <div className="flex w-[10rem] gap-1 text-wrap font-light text-gray-400">
                 <p>Album • {musicData.artist.name}</p>
               </div>
             )}

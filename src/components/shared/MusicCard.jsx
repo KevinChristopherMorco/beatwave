@@ -1,17 +1,17 @@
 import { RiPlayFill } from "@remixicon/react";
 import React from "react";
 
-const MusicCard = ({ music }) => {
+const MusicCard = ({ music, handlePlayAudio }) => {
   return (
     <div className="flex items-center justify-between">
-      <div className="w-[65%] flex items-center gap-2">
+      <div className="flex w-[65%] items-center gap-2">
         <img
           src={music.album.cover}
           alt=""
-          className="w-[3rem] h-[4rem] rounded-md"
+          className="h-[4rem] w-[3rem] rounded-md"
         />
-        <div className="w-full flex flex-col">
-          <p className="font-medium w-full overflow-hidden whitespace-nowrap overflow-ellipsis text-lg">
+        <div className="flex w-full flex-col">
+          <p className="w-full overflow-hidden overflow-ellipsis whitespace-nowrap text-lg font-medium">
             {music.title}
           </p>
           {music?.contributors ? (
@@ -20,7 +20,7 @@ const MusicCard = ({ music }) => {
                 return (
                   <p
                     key={index}
-                    className="w-fit font-light text-gray-400  overflow-hidden whitespace-nowrap overflow-ellipsis"
+                    className="w-fit overflow-hidden overflow-ellipsis  whitespace-nowrap font-light text-gray-400"
                   >
                     {contributors.name}
                   </p>
@@ -28,15 +28,18 @@ const MusicCard = ({ music }) => {
               })}
             </div>
           ) : (
-            <p className="w-fit font-light text-gray-400  overflow-hidden whitespace-nowrap overflow-ellipsis">
+            <p className="w-fit overflow-hidden overflow-ellipsis  whitespace-nowrap font-light text-gray-400">
               {music.artist.name}
             </p>
           )}
         </div>
       </div>
-      <div className="w-[30%] flex items-center justify-end">
-        <div className="w-7 h-7 bg-white rounded-full flex items-center justify-center">
-          <RiPlayFill className="text-black w-5 h-5" />
+      <div className="flex w-[30%] items-center justify-end">
+        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white">
+          <RiPlayFill
+            className="h-5 w-5 text-black"
+            onClick={() => handlePlayAudio(music.preview)}
+          />
         </div>
       </div>
     </div>

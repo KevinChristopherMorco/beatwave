@@ -1,21 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import knownArtist from "../../json/known-artists.json";
 import devPicks from "../../json/developer-pick.json";
 import useMusicApi from "../../hooks/axios/useMusicApi";
+import useScreenResponsiveness from "../../hooks/useScreenResponsiveness";
 
 import FeaturedCard from "../../components/shared/FeaturedCard";
 import MainHeading from "../../components/shared/heading/MainHeading";
 import FeaturedContainer from "../../components/shared/container/FeaturedContainer";
 import ScrollableContainer from "../../components/shared/container/ScrollableContainer";
 import SectionContainer from "../../components/shared/container/SectionContainer";
+import FeatureData from "../../components/shared/FeatureData";
+import usePlayMusic from "../../hooks/usePlayMusic";
 
 const Home = () => {
   const { musicData, isLoading, getChartInformation } = useMusicApi();
+  const {
+    screenSize: { sm, md, lg, xl, xxl },
+  } = useScreenResponsiveness();
 
   useEffect(() => {
     getChartInformation();
   }, []);
+
+  const handlePlayAudio = usePlayMusic();
 
   if (isLoading) return;
 
@@ -26,49 +34,38 @@ const Home = () => {
       <FeaturedContainer>
         <MainHeading title={"Popular Artists"} />
         <ScrollableContainer>
-          {knownArtist.artists.map((artist, index) => {
-            return (
-              <FeaturedCard key={index} musicData={artist} type={"artists"} />
-            );
-          })}
+          <FeatureData musicData={knownArtist.artists} types={"artists"} />
         </ScrollableContainer>
       </FeaturedContainer>
       <FeaturedContainer>
         <MainHeading title={"Editor's Pick"} />
         <ScrollableContainer>
-          {devPicks.artists.map((artist, index) => {
-            return (
-              <FeaturedCard key={index} musicData={artist} type={"artists"} />
-            );
-          })}
+          <FeatureData musicData={devPicks.artists} types={"artists"} />
         </ScrollableContainer>
       </FeaturedContainer>
       <FeaturedContainer>
         <MainHeading title={"Hottest Albums"} />
         <ScrollableContainer>
-          {musicData.albums.data.map((album, index) => {
-            return (
-              <FeaturedCard key={index} musicData={album} type={"albums"} />
-            );
-          })}
+          <FeatureData musicData={musicData.albums.data} types={"albums"} />
         </ScrollableContainer>
       </FeaturedContainer>
       <FeaturedContainer>
         <MainHeading title={"Listener's Favorites"} />
         <ScrollableContainer>
-          {musicData.podcasts.data.map((podcast, index) => {
-            return (
-              <FeaturedCard key={index} musicData={podcast} type={"podcasts"} />
-            );
-          })}
+          <FeatureData musicData={musicData.podcasts.data} types={"podcasts"} />
         </ScrollableContainer>
       </FeaturedContainer>
       <FeaturedContainer>
         <MainHeading title={"Trending Tracks"} />
-        <div className="grid md:grid-cols-2 gap-10">
+        <div className="grid gap-10 md:grid-cols-2">
           {musicData.tracks.data.map((music, index) => {
             return (
-              <FeaturedCard key={index} musicData={music} type={"tracks"} />
+              <FeaturedCard
+                key={index}
+                musicData={music}
+                type={"tracks"}
+                handlePlayAudio={handlePlayAudio}
+              />
             );
           })}
         </div>

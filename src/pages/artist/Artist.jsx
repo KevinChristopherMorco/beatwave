@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 
 import useMusicApi from "../../hooks/axios/useMusicApi";
 import useSlice from "../../hooks/useSlice";
+import useScreenResponsiveness from "../../hooks/useScreenResponsiveness";
+import usePlayMusic from "../../hooks/usePlayMusic";
 
 import FeaturedCard from "../../components/shared/FeaturedCard";
 import Subheading from "../../components/shared/heading/Subheading";
@@ -16,11 +18,16 @@ import SegmentContainer from "../../components/shared/container/SegmentContainer
 import PageFloatingContainer from "../../components/shared/container/PageFloatingContainer";
 import Line from "../../components/loaders/Line";
 import ViewMoreButton from "../../components/shared/buttons/ViewMoreButton";
+import FeatureData from "../../components/shared/FeatureData";
 
 const Artist = () => {
   const { artistID } = useParams();
   const { musicData, isLoading, getArtistsAllData } = useMusicApi();
   const { slice, handleViewItems } = useSlice();
+  const {
+    screenSize: { sm, md, lg, xl, xxl },
+  } = useScreenResponsiveness();
+  const handlePlayAudio = usePlayMusic();
 
   useEffect(() => {
     getArtistsAllData(artistID);
@@ -46,7 +53,13 @@ const Artist = () => {
               <Subheading title={"Artist's top tracks"} />
               <div className="flex flex-col gap-4">
                 {musicData.tracks.data.slice(0, slice).map((music, index) => {
-                  return <MusicCard key={index} music={music} />;
+                  return (
+                    <MusicCard
+                      key={index}
+                      music={music}
+                      handlePlayAudio={handlePlayAudio}
+                    />
+                  );
                 })}
               </div>
 
@@ -65,14 +78,14 @@ const Artist = () => {
           <SegmentContainer>
             <Subheading
               title={"Popular Albums"}
-              subtext={`Most popular albums from ${musicData.artist.name}`}
+              subtext={`More albums from ${musicData.artist.name}`}
+              hasPrommpt={true}
             />
             <ScrollableContainer>
-              {musicData.albums.data.data.map((album, index) => {
-                return (
-                  <FeaturedCard key={index} musicData={album} type={"albums"} />
-                );
-              })}
+              <FeatureData
+                musicData={musicData.albums.data.data}
+                types={"albums"}
+              />
             </ScrollableContainer>
           </SegmentContainer>
         )}
@@ -80,19 +93,15 @@ const Artist = () => {
         {musicData.similar.data.length > 0 && (
           <SegmentContainer>
             <Subheading
-              title={"Similar Artists"}
+              title={"Fans Also Like"}
               subtext={`Find artists similar to ${musicData.artist.name}`}
+              hasPrommpt={true}
             />
             <ScrollableContainer>
-              {musicData.similar.data.map((similar, index) => {
-                return (
-                  <FeaturedCard
-                    key={index}
-                    musicData={similar}
-                    type={"artists"}
-                  />
-                );
-              })}
+              <FeatureData
+                musicData={musicData.similar.data}
+                types={"artists"}
+              />
             </ScrollableContainer>
           </SegmentContainer>
         )}
