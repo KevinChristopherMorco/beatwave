@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import useMusicApi from "../../hooks/axios/useMusicApi";
@@ -23,11 +23,8 @@ import FeatureData from "../../components/shared/FeatureData";
 const Artist = () => {
   const { artistID } = useParams();
   const { musicData, isLoading, getArtistsAllData } = useMusicApi();
+  const { currentAudio, isPlaying, handlePlayAudio } = usePlayMusic();
   const { slice, handleViewItems } = useSlice();
-  const {
-    screenSize: { sm, md, lg, xl, xxl },
-  } = useScreenResponsiveness();
-  const handlePlayAudio = usePlayMusic();
 
   useEffect(() => {
     getArtistsAllData(artistID);
@@ -35,6 +32,8 @@ const Artist = () => {
   }, [artistID]);
 
   if (isLoading) return <Line />;
+
+  console.log(musicData);
 
   return (
     <SectionContainer>
@@ -57,6 +56,8 @@ const Artist = () => {
                     <MusicCard
                       key={index}
                       music={music}
+                      currentAudio={currentAudio}
+                      isPlaying={isPlaying}
                       handlePlayAudio={handlePlayAudio}
                     />
                   );
@@ -74,7 +75,7 @@ const Artist = () => {
           </>
         )}
 
-        {musicData.albums.data.data.length > 0 && (
+        {musicData.albums.data.length > 0 && (
           <SegmentContainer>
             <Subheading
               title={"Popular Albums"}
@@ -82,10 +83,7 @@ const Artist = () => {
               hasPrommpt={true}
             />
             <ScrollableContainer>
-              <FeatureData
-                musicData={musicData.albums.data.data}
-                types={"albums"}
-              />
+              <FeatureData musicData={musicData.albums.data} types={"albums"} />
             </ScrollableContainer>
           </SegmentContainer>
         )}

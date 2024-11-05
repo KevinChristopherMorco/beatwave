@@ -9,6 +9,7 @@ import Artist from "./pages/artist/Artist";
 import Search from "./pages/search/Search";
 import Album from "./pages/album/Album";
 import Podcast from "./pages/podcast/Podcast";
+import ViewAllData from "./components/shared/page/ViewAllData";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/album/:albumID" element={<Album />} />
           <Route path="/podcast/:podcastID" element={<Podcast />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/all" element={<ViewAllData />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -15,7 +15,7 @@ const Layout = () => {
   return (
     <>
       {pathname === "/" && (sm || md) && <Header />}
-      <main className="flex flex-col mb-[5rem] grow lg:w-full lg:grid lg:grid-cols-[1fr_4fr]">
+      <main className="mb-[5rem] flex grow flex-col lg:relative lg:mb-0 lg:grid lg:w-full lg:grid-cols-[1fr_4fr]">
         {(lg || xl || xxl) && <Sidebar />}
         <Outlet />
       </main>

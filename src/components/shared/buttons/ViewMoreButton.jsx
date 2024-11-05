@@ -12,7 +12,7 @@ const ViewMoreButton = ({
     <div className="flex items-center justify-center">
       <button
         onClick={() => handleViewItems(length)}
-        className="w-full border p-2 rounded-md hover:bg-[var(--background-color-neutral)] transition-colors"
+        className="w-full rounded-md border p-2 transition-colors hover:bg-[var(--background-color-neutral)]"
       >
         {slice >= length ? collapseText : maximizeText}
       </button>

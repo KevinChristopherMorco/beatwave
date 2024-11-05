@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 
 import knownArtist from "../../json/known-artists.json";
 import devPicks from "../../json/developer-pick.json";
@@ -23,7 +23,7 @@ const Home = () => {
     getChartInformation();
   }, []);
 
-  const handlePlayAudio = usePlayMusic();
+  const { currentAudio, isPlaying, handlePlayAudio } = usePlayMusic();
 
   if (isLoading) return;
 
@@ -64,6 +64,8 @@ const Home = () => {
                 key={index}
                 musicData={music}
                 type={"tracks"}
+                currentAudio={currentAudio}
+                isPlaying={isPlaying}
                 handlePlayAudio={handlePlayAudio}
               />
             );

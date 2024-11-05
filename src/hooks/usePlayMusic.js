@@ -1,19 +1,25 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const usePlayMusic = () => {
   const audioRef = useRef(new Audio());
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentAudio, setCurrentAudio] = useState("");
 
   const handlePlayAudio = (audio) => {
-    if (audioRef.current === audio) {
+    audioRef.current.src = audio;
+
+    if (isPlaying) {
       audioRef.current.pause();
+      setIsPlaying(false);
+      setCurrentAudio(audio);
     } else {
-      audioRef.current.pause();
-      audioRef.current.src = audio;
       audioRef.current.play();
+      setIsPlaying(true);
+      setCurrentAudio(audio);
     }
   };
 
-  return handlePlayAudio;
+  return { currentAudio, isPlaying, handlePlayAudio };
 };
 
 export default usePlayMusic;

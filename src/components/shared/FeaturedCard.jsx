@@ -1,11 +1,17 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { RiPlayFill, RiVolumeUpLine } from "@remixicon/react";
+import { RiVolumeUpLine } from "@remixicon/react";
 
 import useScreenResponsiveness from "../../hooks/useScreenResponsiveness";
-import useMusicApi from "../../hooks/axios/useMusicApi";
+import PlayButton from "./buttons/PlayButton";
 
-const FeaturedCard = ({ musicData, type, handlePlayAudio }) => {
+const FeaturedCard = ({
+  musicData,
+  type,
+  currentAudio,
+  isPlaying,
+  handlePlayAudio,
+}) => {
   const navigate = useNavigate();
   const {
     screenSize: { sm, md, lg, xl, xxl },
@@ -75,12 +81,12 @@ const FeaturedCard = ({ musicData, type, handlePlayAudio }) => {
               <RiVolumeUpLine className="h-5 w-5" />
               <p className="text-sm font-light">See more tracks</p>
             </div>
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white">
-              <RiPlayFill
-                className="h-7 w-7 text-black"
-                onClick={() => handlePlayAudio(musicData.preview)}
-              />
-            </div>
+            <PlayButton
+              musicData={musicData.preview}
+              currentAudio={currentAudio}
+              isPlaying={isPlaying}
+              handlePlayAudio={handlePlayAudio}
+            />
           </div>
         </div>
       )}
