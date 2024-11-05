@@ -23,7 +23,7 @@ const Album = () => {
   const { albumID } = useParams();
   const { musicData, isLoading, getAlbumAllData } = useMusicApi();
   const { slice, handleViewItems } = useSlice();
-  const { handlePlayAudio } = usePlayMusic();
+  const { currentAudio, isPlaying, handlePlayAudio } = usePlayMusic();
 
   useEffect(() => {
     getAlbumAllData(albumID);
@@ -83,6 +83,8 @@ const Album = () => {
                   <MusicCard
                     key={index}
                     music={music}
+                    currentAudio={currentAudio}
+                    isPlaying={isPlaying}
                     handlePlayAudio={handlePlayAudio}
                   />
                 );

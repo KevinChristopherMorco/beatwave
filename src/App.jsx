@@ -10,6 +10,9 @@ import Search from "./pages/search/Search";
 import Album from "./pages/album/Album";
 import Podcast from "./pages/podcast/Podcast";
 import ViewAllData from "./components/shared/page/ViewAllData";
+import SimilarArtist from "./pages/artist/SimilarArtist";
+import TopTracks from "./pages/artist/TopTracks";
+import TopAlbums from "./pages/artist/TopAlbums";
 
 function App() {
   return (
@@ -22,6 +25,12 @@ function App() {
           <Route path="/podcast/:podcastID" element={<Podcast />} />
           <Route path="/search" element={<Search />} />
           <Route path="/all" element={<ViewAllData />} />
+          <Route
+            path="/artist/:artistID/similar-artist"
+            element={<SimilarArtist />}
+          />
+          <Route path="/artist/:artistID/top-tracks" element={<TopTracks />} />
+          <Route path="/artist/:artistID/top-albums" element={<TopAlbums />} />
         </Route>
       </Routes>
     </BrowserRouter>

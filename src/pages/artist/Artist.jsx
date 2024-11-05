@@ -19,12 +19,17 @@ import PageFloatingContainer from "../../components/shared/container/PageFloatin
 import Line from "../../components/loaders/Line";
 import ViewMoreButton from "../../components/shared/buttons/ViewMoreButton";
 import FeatureData from "../../components/shared/FeatureData";
+import TabList from "../../components/shared/buttons/TabList";
 
 const Artist = () => {
   const { artistID } = useParams();
   const { musicData, isLoading, getArtistsAllData } = useMusicApi();
   const { currentAudio, isPlaying, handlePlayAudio } = usePlayMusic();
   const { slice, handleViewItems } = useSlice();
+
+  const {
+    screenSize: { sm, md, lg, xl, xxl },
+  } = useScreenResponsiveness();
 
   useEffect(() => {
     getArtistsAllData(artistID);
@@ -40,17 +45,21 @@ const Artist = () => {
       <PageHeader musicData={musicData} type={"artist"} />
       <FloatingBackground imageURL={musicData.artist.picture_xl} />
       <PageFloatingContainer>
+        <TabList musicData={musicData} />
+
         {musicData.tracks.data.length > 0 && (
           <>
-            <div>
-              <p>
-                Listen to all the previews of all {musicData.artist.name}'s
-                tracks
-              </p>
-            </div>
             <SegmentContainer>
-              <Subheading title={"Artist's top tracks"} />
+              <Subheading
+                title={"Artist's top tracks"}
+                link={`/artist/${musicData.artist.id}/top-tracks`}
+                hasPrommpt={true}
+              />
               <div className="flex flex-col gap-4">
+                <p>
+                  Listen to all the previews of all {musicData.artist.name}'s
+                  tracks
+                </p>
                 {musicData.tracks.data.slice(0, slice).map((music, index) => {
                   return (
                     <MusicCard
@@ -93,6 +102,7 @@ const Artist = () => {
             <Subheading
               title={"Fans Also Like"}
               subtext={`Find artists similar to ${musicData.artist.name}`}
+              link={`/artist/${musicData.artist.id}/similar-artist`}
               hasPrommpt={true}
             />
             <ScrollableContainer>

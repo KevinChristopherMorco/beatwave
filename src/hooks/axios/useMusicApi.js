@@ -105,8 +105,6 @@ const useMusicApi = () => {
         `https://corsproxy.io/?https://api.deezer.com/artist/${id}/related`,
       );
 
-      console.log(artistAlbum);
-
       const appendData = {
         tracks: trackResponse.data,
         artist: artistResponse.data,
