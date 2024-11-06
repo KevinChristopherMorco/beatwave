@@ -26,14 +26,12 @@ const Podcast = () => {
 
   if (isLoading) return <Line />;
 
-  console.log(musicData);
-
   return (
     <SectionContainer>
       <PageHeader musicData={musicData} type={"podcast"} />
       <FloatingBackground imageURL={musicData.picture_xl} />
       <PageFloatingContainer>
-        <p className="font-bold text-4xl">{musicData.title}</p>
+        <p className="text-4xl font-bold">{musicData.title}</p>
         <p>Preview not available</p>
         <p>{musicData.description}</p>
         {/* {musicData.tracks.data.length > 0 && (

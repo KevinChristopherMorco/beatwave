@@ -1,8 +1,7 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { RiVolumeUpLine } from "@remixicon/react";
+import React from "react";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
-import useScreenResponsiveness from "../../hooks/useScreenResponsiveness";
 import PlayButton from "./buttons/PlayButton";
 
 const FeaturedCard = ({
@@ -12,10 +11,10 @@ const FeaturedCard = ({
   isPlaying,
   handlePlayAudio,
 }) => {
+  const { artistID } = useParams();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
-  const {
-    screenSize: { sm, md, lg, xl, xxl },
-  } = useScreenResponsiveness();
+
   const handleLinkClick = () => {
     // Change the URL without reloading the page
     navigate(`/artist/${musicData.id}`);
@@ -109,10 +108,10 @@ const FeaturedCard = ({
       {type === "albums" && (
         <Link
           to={`/album/${musicData.id}`}
-          className="group flex shrink-0 cursor-pointer flex-col items-start gap-4 px-4"
+          className={`${pathname === `/artist/${artistID}/top-albums` ? "px-0" : "px-4"} group flex shrink-0 cursor-pointer flex-col items-start gap-4 px-4`}
         >
           <div
-            className="h-[10rem] w-[10rem] rounded-md border border-gray-800 bg-cover bg-center xl:h-[14rem] xl:w-[14rem]"
+            className="h-[10rem] w-full rounded-md border border-gray-800 bg-cover bg-center xl:h-[14rem] xl:w-[14rem]"
             style={{ backgroundImage: `url(${musicData.cover_xl})` }}
           ></div>
           <div className="flex flex-col">

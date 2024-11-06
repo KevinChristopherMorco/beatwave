@@ -1,14 +1,16 @@
 import React, { useEffect } from "react";
-import useMusicApi from "../../hooks/axios/useMusicApi";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-import PageHeader from "../../components/shared/PageHeader";
-import FloatingBackground from "../../components/shared/page/FloatingBackground";
+import useMusicApi from "../../hooks/axios/useMusicApi";
+
+import TabList from "../../components/shared/buttons/TabList";
 import PageFloatingContainer from "../../components/shared/container/PageFloatingContainer";
-import FeatureData from "../../components/shared/FeatureData";
 import FeaturedCard from "../../components/shared/FeaturedCard";
 import MainHeading from "../../components/shared/heading/MainHeading";
-import TabList from "../../components/shared/buttons/TabList";
+import FloatingBackground from "../../components/shared/page/FloatingBackground";
+import PageHeader from "../../components/shared/PageHeader";
+import SectionContainer from "../../components/shared/container/SectionContainer";
+import Line from "../../components/loaders/Line";
 
 const SimilarArtist = () => {
   const { artistID } = useParams();
@@ -19,18 +21,15 @@ const SimilarArtist = () => {
     window.scrollTo({ top: 0 });
   }, [artistID]);
 
-  if (isLoading) return;
+  if (isLoading) return <Line />;
 
   return (
-    <section>
+    <SectionContainer>
       <PageHeader musicData={musicData} type={"artist"} />
       <FloatingBackground imageURL={musicData.artist.picture_xl} />
       <PageFloatingContainer>
         <TabList musicData={musicData} />
-
-        <div>
-          <MainHeading title={`Fans may also like:`} />
-        </div>
+        <MainHeading title={`Fans may also like:`} />
         <div className="grid grid-cols-2 gap-10 lg:grid-cols-4 ">
           {musicData.similar.data.map((type, index) => {
             return (
@@ -39,7 +38,7 @@ const SimilarArtist = () => {
           })}
         </div>
       </PageFloatingContainer>
-    </section>
+    </SectionContainer>
   );
 };
 

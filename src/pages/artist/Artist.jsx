@@ -1,25 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 
 import useMusicApi from "../../hooks/axios/useMusicApi";
-import useSlice from "../../hooks/useSlice";
-import useScreenResponsiveness from "../../hooks/useScreenResponsiveness";
 import usePlayMusic from "../../hooks/usePlayMusic";
+import useScreenResponsiveness from "../../hooks/useScreenResponsiveness";
+import useSlice from "../../hooks/useSlice";
 
-import FeaturedCard from "../../components/shared/FeaturedCard";
+import Line from "../../components/loaders/Line";
+import TabList from "../../components/shared/buttons/TabList";
+import ViewMoreButton from "../../components/shared/buttons/ViewMoreButton";
+import PageFloatingContainer from "../../components/shared/container/PageFloatingContainer";
+import ScrollableContainer from "../../components/shared/container/ScrollableContainer";
+import SectionContainer from "../../components/shared/container/SectionContainer";
+import SegmentContainer from "../../components/shared/container/SegmentContainer";
+import FeatureData from "../../components/shared/FeatureData";
 import Subheading from "../../components/shared/heading/Subheading";
 import MusicCard from "../../components/shared/MusicCard";
-import PageHeader from "../../components/shared/PageHeader";
-import SectionContainer from "../../components/shared/container/SectionContainer";
 import FloatingBackground from "../../components/shared/page/FloatingBackground";
-import ScrollableContainer from "../../components/shared/container/ScrollableContainer";
-import Pulse from "../../components/loaders/Pulse";
-import SegmentContainer from "../../components/shared/container/SegmentContainer";
-import PageFloatingContainer from "../../components/shared/container/PageFloatingContainer";
-import Line from "../../components/loaders/Line";
-import ViewMoreButton from "../../components/shared/buttons/ViewMoreButton";
-import FeatureData from "../../components/shared/FeatureData";
-import TabList from "../../components/shared/buttons/TabList";
+import PageHeader from "../../components/shared/PageHeader";
 
 const Artist = () => {
   const { artistID } = useParams();
@@ -27,18 +25,12 @@ const Artist = () => {
   const { currentAudio, isPlaying, handlePlayAudio } = usePlayMusic();
   const { slice, handleViewItems } = useSlice();
 
-  const {
-    screenSize: { sm, md, lg, xl, xxl },
-  } = useScreenResponsiveness();
-
   useEffect(() => {
     getArtistsAllData(artistID);
     window.scrollTo({ top: 0 });
   }, [artistID]);
 
   if (isLoading) return <Line />;
-
-  console.log(musicData);
 
   return (
     <SectionContainer>
@@ -73,13 +65,20 @@ const Artist = () => {
                 })}
               </div>
 
-              <ViewMoreButton
+              {/* <ViewMoreButton
                 slice={slice}
                 length={musicData.tracks.data.length}
                 maximizeText={"View more tracks"}
                 collapseText={"Minimize tracks"}
                 handleViewItems={handleViewItems}
-              />
+              /> */}
+
+              <Link
+                to={`/artist/${musicData.artist.id}/top-tracks`}
+                className="rounded-md border border-[var(--brand-color-500)] p-2 text-center text-[var(--brand-color-500)] transition-colors hover:bg-[var(--brand-color-500)] hover:text-white"
+              >
+                <p>View more tracks</p>
+              </Link>
             </SegmentContainer>
           </>
         )}
@@ -89,6 +88,7 @@ const Artist = () => {
             <Subheading
               title={"Popular Albums"}
               subtext={`More albums from ${musicData.artist.name}`}
+              link={`/artist/${musicData.artist.id}/top-albums`}
               hasPrommpt={true}
             />
             <ScrollableContainer>

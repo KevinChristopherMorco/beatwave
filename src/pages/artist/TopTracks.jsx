@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import useMusicApi from "../../hooks/axios/useMusicApi";
@@ -6,11 +6,12 @@ import usePlayMusic from "../../hooks/usePlayMusic";
 
 import MusicCard from "../../components/shared/MusicCard";
 import PageHeader from "../../components/shared/PageHeader";
-import FloatingBackground from "../../components/shared/page/FloatingBackground";
-import PageFloatingContainer from "../../components/shared/container/PageFloatingContainer";
 import TabList from "../../components/shared/buttons/TabList";
-import { RiHeartLine, RiPlayCircleFill } from "@remixicon/react";
-import PlayButton from "../../components/shared/buttons/PlayButton";
+import PageFloatingContainer from "../../components/shared/container/PageFloatingContainer";
+import SectionContainer from "../../components/shared/container/SectionContainer";
+import FloatingBackground from "../../components/shared/page/FloatingBackground";
+import MainHeading from "../../components/shared/heading/MainHeading";
+import Line from "../../components/loaders/Line";
 
 const TopTracks = () => {
   const { artistID } = useParams();
@@ -22,14 +23,15 @@ const TopTracks = () => {
     window.scrollTo({ top: 0 });
   }, [artistID]);
 
-  if (isLoading) return;
+  if (isLoading) return <Line />;
 
   return (
-    <div>
+    <SectionContainer>
       <PageHeader musicData={musicData} type={"artist"} />
       <FloatingBackground imageURL={musicData.artist.picture_xl} />
       <PageFloatingContainer>
         <TabList musicData={musicData} />
+        <MainHeading title={`${musicData.artist.name}'s Top Tracks`} />
         <table className="w-full">
           <thead>
             <tr className="uppercase">
@@ -54,7 +56,7 @@ const TopTracks = () => {
           </tbody>
         </table>
       </PageFloatingContainer>
-    </div>
+    </SectionContainer>
   );
 };
 

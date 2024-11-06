@@ -31,8 +31,6 @@ const Album = () => {
 
   if (isLoading) return <Line />;
 
-  console.log(musicData);
-
   return (
     <SectionContainer>
       <PageHeader musicData={musicData} type={"album"} />

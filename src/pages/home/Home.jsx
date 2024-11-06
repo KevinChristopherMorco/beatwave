@@ -27,8 +27,6 @@ const Home = () => {
 
   if (isLoading) return;
 
-  console.log(musicData);
-
   return (
     <SectionContainer>
       <FeaturedContainer>

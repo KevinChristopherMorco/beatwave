@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const useSlice = () => {
-  const [slice, setSlice] = useState(10);
+  const [slice, setSlice] = useState(8);
 
   const handleViewItems = (length) => {
     if (slice >= length) {
-      setSlice(10);
+      setSlice(8);
     } else {
-      setSlice((prev) => prev + 10);
+      setSlice((prev) => prev + 8);
     }
   };
 
