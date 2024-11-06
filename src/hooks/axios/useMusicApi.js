@@ -77,10 +77,40 @@ const useMusicApi = () => {
 
   const getSearchResults = async (query) => {
     try {
-      const response = await axios.get(
-        `https://corsproxy.io/?https://api.deezer.com/search?q=${query}`,
+      // const response = await axios.get(
+      //   `https://corsproxy.io/?https://api.deezer.com/search?q=${query}`,
+      // );
+
+      const artistResponse = await axios.get(
+        `https://corsproxy.io/?https://api.deezer.com/search?q=artist:"${query}"`,
       );
-      setMusicData(response.data);
+
+      console.log(artistResponse);
+
+      const artistPromises = artistResponse.data.data.map(async (data) => {
+        const artistId = data.artist.id;
+        const artistDetailsResponse = await axios.get(
+          `https://corsproxy.io/?https://api.deezer.com/artist/${artistId}`,
+        );
+        return artistDetailsResponse;
+      });
+
+      const artistDetailsArray = await Promise.all(artistPromises);
+
+      const trackResponse = await axios.get(
+        `https://corsproxy.io/?https://api.deezer.com/search?q=track:"${query}"`,
+      );
+      const albumResponse = await axios.get(
+        `https://corsproxy.io/?https://api.deezer.com/search?q=album:"${query}"`,
+      );
+
+      const appendData = {
+        tracks: trackResponse.data,
+        artist: artistDetailsArray.slice(0, 1),
+        albums: albumResponse.data,
+      };
+
+      setMusicData(appendData);
       setLoading(false);
     } catch (error) {
       console.error(error);

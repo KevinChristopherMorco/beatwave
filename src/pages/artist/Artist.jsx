@@ -38,7 +38,7 @@ const Artist = () => {
       <PageHeader musicData={musicData} type={"artist"} />
       <FloatingBackground imageURL={musicData.artist.picture_xl} />
       <PageFloatingContainer>
-        <TabList musicData={musicData} />
+        <TabList musicData={musicData} type={"page"} />
 
         {musicData.tracks.data.length > 0 && (
           <>

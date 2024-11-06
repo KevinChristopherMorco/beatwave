@@ -1,32 +1,106 @@
-import React from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 import useScreenResponsiveness from "../hooks/useScreenResponsiveness";
+import useMusicApi from "../hooks/axios/useMusicApi";
 
 import AccountHeader from "../components/partials/AccountHeader";
 import Header from "../components/partials/Header";
 import Sidebar from "../components/partials/Sidebar";
 import Tab from "../components/partials/Tab";
 import AudioPlayer from "../components/track/AudioPlayer";
+import TabList from "../components/shared/buttons/TabList";
+import useSearch from "../hooks/search/useSearch";
+import { RiVerifiedBadgeFill } from "@remixicon/react";
 
 const Layout = () => {
   const { pathname } = useLocation();
+  const [toggleSearch, setToggleSearch] = useState(false);
+  const {
+    query,
+    musicData: { artist } = [],
+    isLoading,
+    artistResult,
+    handleSearchQuery,
+  } = useSearch();
+
   const {
     screenSize: { sm, md, lg, xl, xxl },
   } = useScreenResponsiveness();
+
+  const isLargeScreen = lg || xl || xxl;
+  const isSmallScreen = sm || md;
+
+  console.log(artist);
+
+  const SearchView = () => {
+    return (
+      <div className="z-[999] flex h-full w-full grow flex-col bg-[var(--background-color)] px-4 py-6">
+        <TabList type={"search"} />
+        {!isLoading && query.length > 0 && (
+          <div>
+            <div className="flex flex-col gap-4">
+              <p className="text-xl font-bold">Artist</p>
+              <div className="flex">
+                {artist?.map((artist, index) => {
+                  const { data } = artist;
+                  console.log(artist);
+                  return (
+                    <Link
+                      to={`/artist/${data.id}`}
+                      key={index}
+                      className="flex w-full items-center gap-2"
+                    >
+                      <img
+                        src={data.picture_xl}
+                        alt=""
+                        className="h-[10rem] w-[10rem] rounded-full"
+                      />
+
+                      <div className="flex w-full flex-col py-1">
+                        <div className="flex items-center gap-2">
+                          <p className="overflow-hidden overflow-ellipsis whitespace-nowrap font-medium">
+                            {data.name}
+                          </p>
+                          <RiVerifiedBadgeFill className="h-4 w-4 text-[#1C9CEA]" />
+                        </div>
+
+                        <div className="flex gap-1 text-sm font-light text-gray-400">
+                          <p>Artist</p>
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <>
-      {pathname === "/" && (sm || md) && <Header />}
-      {(lg || xl || xxl) && <AccountHeader />}
-      <div className="fixed z-[999] h-screen bg-red-500"></div>
+      {isLargeScreen && (
+        <>
+          <Sidebar />
+          <div
+            className={`${query.length > 0 ? "h-screen" : ""} sticky top-0 z-[999] flex w-full flex-col`}
+          >
+            {isLargeScreen && (
+              <AccountHeader handleInputChange={handleSearchQuery} />
+            )}
+            {query.length > 0 && SearchView()}
+          </div>
+        </>
+      )}
 
-      <main className="mb-[5rem] flex grow flex-col lg:relative lg:mb-0 lg:grid lg:w-full lg:grid-cols-[1fr_3fr] xl:grid-cols-[1fr_5fr]">
-        {(lg || xl || xxl) && <Sidebar />}
-
+      <main className="mb-[5rem] flex grow flex-col lg:col-start-2">
         <Outlet />
       </main>
-      <AudioPlayer />
-      {(sm || md) && <Tab />}
+      {isSmallScreen && <Tab />}
+      {isLargeScreen && <AudioPlayer />}
     </>
   );
 };

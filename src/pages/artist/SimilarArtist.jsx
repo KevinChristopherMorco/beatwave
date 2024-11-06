@@ -28,7 +28,7 @@ const SimilarArtist = () => {
       <PageHeader musicData={musicData} type={"artist"} />
       <FloatingBackground imageURL={musicData.artist.picture_xl} />
       <PageFloatingContainer>
-        <TabList musicData={musicData} />
+        <TabList musicData={musicData} type={"page"} />
         <MainHeading title={`Fans may also like:`} />
         <div className="grid grid-cols-2 gap-10 lg:grid-cols-4 ">
           {musicData.similar.data.map((type, index) => {

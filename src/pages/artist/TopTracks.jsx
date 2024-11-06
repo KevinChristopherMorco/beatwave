@@ -30,7 +30,7 @@ const TopTracks = () => {
       <PageHeader musicData={musicData} type={"artist"} />
       <FloatingBackground imageURL={musicData.artist.picture_xl} />
       <PageFloatingContainer>
-        <TabList musicData={musicData} />
+        <TabList musicData={musicData} type={"page"} />
         <MainHeading title={`${musicData.artist.name}'s Top Tracks`} />
         <table className="w-full">
           <thead>

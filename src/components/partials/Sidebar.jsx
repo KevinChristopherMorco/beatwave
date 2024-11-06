@@ -9,7 +9,7 @@ const Sidebar = () => {
       <p className="brand-name text-3xl font-extrabold">Beatwave</p>
       <ul className="flex flex-col gap-5 text-xl font-medium">
         <li
-          className={`${pathname === "/" ? "py-2 text-[var(--brand-color-500)]" : ""} font-bold `}
+          className={`${pathname === "/" ? "text-[var(--brand-color-500)]" : ""} font-bold `}
         >
           <Link
             to={"/"}
@@ -20,7 +20,7 @@ const Sidebar = () => {
           </Link>
         </li>
         <li
-          className={`${pathname === "/favorites" ? "py-2 font-bold text-[var(--brand-color-500)]" : ""} font-bold `}
+          className={`${pathname === "/favorites" ? "font-bold text-[var(--brand-color-500)]" : ""} font-bold `}
         >
           <Link
             to={"/favorites"}

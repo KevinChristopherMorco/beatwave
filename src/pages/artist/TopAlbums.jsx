@@ -27,7 +27,7 @@ const TopAlbums = () => {
       <PageHeader musicData={musicData} type={"artist"} />
       <FloatingBackground imageURL={musicData.artist.picture_xl} />
       <PageFloatingContainer>
-        <TabList musicData={musicData} />
+        <TabList musicData={musicData} type={"page"} />
         <MainHeading title={`${musicData.artist.name}'s Albums`} />
         <div className="grid grid-cols-2 gap-6 lg:grid-cols-4 lg:gap-10 ">
           {musicData.albums.data.map((type, index) => {
