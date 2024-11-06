@@ -15,35 +15,38 @@ import TopTracks from "./pages/artist/TopTracks";
 import TopAlbums from "./pages/artist/TopAlbums";
 import Favorites from "./pages/favorites/Favorites";
 import FavoriteProvider from "./hooks/FavoriteProvider";
+import MusicProvider from "./hooks/MusicProvider";
 
 function App() {
   return (
     <BrowserRouter>
       <FavoriteProvider>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="/artist/:artistID" element={<Artist />} />
-            <Route path="/album/:albumID" element={<Album />} />
-            <Route path="/podcast/:podcastID" element={<Podcast />} />
-            <Route path="/favorites/" element={<Favorites />} />
+        <MusicProvider>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="/artist/:artistID" element={<Artist />} />
+              <Route path="/album/:albumID" element={<Album />} />
+              <Route path="/podcast/:podcastID" element={<Podcast />} />
+              <Route path="/favorites/" element={<Favorites />} />
 
-            <Route path="/search" element={<Search />} />
-            <Route path="/all" element={<ViewAllData />} />
-            <Route
-              path="/artist/:artistID/similar-artist"
-              element={<SimilarArtist />}
-            />
-            <Route
-              path="/artist/:artistID/top-tracks"
-              element={<TopTracks />}
-            />
-            <Route
-              path="/artist/:artistID/top-albums"
-              element={<TopAlbums />}
-            />
-          </Route>
-        </Routes>
+              <Route path="/search" element={<Search />} />
+              <Route path="/all" element={<ViewAllData />} />
+              <Route
+                path="/artist/:artistID/similar-artist"
+                element={<SimilarArtist />}
+              />
+              <Route
+                path="/artist/:artistID/top-tracks"
+                element={<TopTracks />}
+              />
+              <Route
+                path="/artist/:artistID/top-albums"
+                element={<TopAlbums />}
+              />
+            </Route>
+          </Routes>
+        </MusicProvider>
       </FavoriteProvider>
     </BrowserRouter>
   );

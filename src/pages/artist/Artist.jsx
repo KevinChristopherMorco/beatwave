@@ -18,11 +18,12 @@ import Subheading from "../../components/shared/heading/Subheading";
 import MusicCard from "../../components/shared/MusicCard";
 import FloatingBackground from "../../components/shared/page/FloatingBackground";
 import PageHeader from "../../components/shared/PageHeader";
+import { useMusicContext } from "../../hooks/MusicProvider";
 
 const Artist = () => {
   const { artistID } = useParams();
   const { musicData, isLoading, getArtistsAllData } = useMusicApi();
-  const { currentAudio, isPlaying, handlePlayAudio } = usePlayMusic();
+  const { currentAudio, isPlaying, handlePlayAudio } = useMusicContext();
   const { slice, handleViewItems } = useSlice();
 
   useEffect(() => {

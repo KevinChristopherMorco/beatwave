@@ -34,6 +34,18 @@
   #root {
     @apply relative flex min-h-screen  flex-col gap-2 bg-[var(--background-color)] text-[var(--text-color)];
   }
+
+  ::-webkit-scrollbar {
+    @apply w-1;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--background-color-neutral);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--brand-color-500);
+  }
 }
 
 .scrollable-content {
