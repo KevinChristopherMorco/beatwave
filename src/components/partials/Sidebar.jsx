@@ -5,7 +5,7 @@ import { RiHeartLine, RiHome8Line } from "@remixicon/react";
 const Sidebar = () => {
   const { pathname } = useLocation();
   return (
-    <nav className="sticky top-0 col-span-1 flex h-screen w-full flex-col gap-10 border-r border-gray-700 bg-[var(--background-color-neutral)] p-4">
+    <nav className="sticky top-0 z-[999] col-span-1 flex h-screen w-full flex-col gap-10 border-r border-gray-700 bg-[var(--background-color-neutral)] p-4">
       <p className="brand-name text-3xl font-extrabold">Beatwave</p>
       <ul className="flex flex-col gap-5 text-xl font-medium">
         <li

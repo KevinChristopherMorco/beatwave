@@ -4,13 +4,7 @@ import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 import PlayButton from "./buttons/PlayButton";
 
-const FeaturedCard = ({
-  musicData,
-  type,
-  currentAudio,
-  isPlaying,
-  handlePlayAudio,
-}) => {
+const FeaturedCard = ({ musicData, type }) => {
   const { artistID } = useParams();
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -80,12 +74,7 @@ const FeaturedCard = ({
               <RiVolumeUpLine className="h-5 w-5" />
               <p className="text-sm font-light">See more tracks</p>
             </div>
-            <PlayButton
-              musicData={musicData.preview}
-              currentAudio={currentAudio}
-              isPlaying={isPlaying}
-              handlePlayAudio={handlePlayAudio}
-            />
+            <PlayButton musicData={musicData} />
           </div>
         </div>
       )}

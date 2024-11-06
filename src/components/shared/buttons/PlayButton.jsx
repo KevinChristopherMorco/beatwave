@@ -1,14 +1,15 @@
 import React from "react";
 import { RiPauseFill, RiPlayFill } from "@remixicon/react";
 
-const PlayButton = ({
-  musicData,
-  currentAudio,
-  type,
-  isPlaying,
-  handlePlayAudio,
-}) => {
-  const isCurrentAudio = currentAudio === musicData;
+import { useMusicContext } from "../../../hooks/MusicProvider";
+
+const PlayButton = ({ musicData, type }) => {
+  const {
+    currentAudio: { preview },
+    isPlaying,
+    handlePlayAudio,
+  } = useMusicContext();
+  const isCurrentAudio = preview === musicData?.preview;
 
   return (
     <>

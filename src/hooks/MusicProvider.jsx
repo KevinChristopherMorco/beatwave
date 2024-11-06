@@ -8,7 +8,8 @@ const MusicProvider = ({ children }) => {
   const [currentAudio, setCurrentAudio] = useState("");
 
   const handlePlayAudio = (audio) => {
-    audioRef.current.src = audio;
+    const { preview } = audio;
+    audioRef.current.src = preview;
 
     if (isPlaying) {
       audioRef.current.pause();

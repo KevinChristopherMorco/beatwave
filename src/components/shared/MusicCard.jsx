@@ -3,14 +3,7 @@ import { RiHeartLine } from "@remixicon/react";
 
 import PlayButton from "./buttons/PlayButton";
 
-const MusicCard = ({
-  index,
-  music,
-  currentAudio,
-  type,
-  isPlaying,
-  handlePlayAudio,
-}) => {
+const MusicCard = ({ index, music, type }) => {
   const [hover, setHover] = useState();
 
   return (
@@ -29,15 +22,7 @@ const MusicCard = ({
                 className=" h-full w-full rounded-md"
               />
 
-              {hover && (
-                <PlayButton
-                  musicData={music.preview}
-                  currentAudio={currentAudio}
-                  type={"hover"}
-                  isPlaying={isPlaying}
-                  handlePlayAudio={handlePlayAudio}
-                />
-              )}
+              {hover && <PlayButton musicData={music} type={"hover"} />}
             </div>
             <div className="flex w-full flex-col">
               <p className="flex w-full gap-2 font-medium">
@@ -81,12 +66,7 @@ const MusicCard = ({
             </div>
           </div>
           <div className="flex w-[30%] items-center justify-end">
-            <PlayButton
-              musicData={music.preview}
-              isPlaying={isPlaying}
-              handlePlayAudio={handlePlayAudio}
-              currentAudio={currentAudio}
-            />
+            <PlayButton musicData={music} />
           </div>
         </div>
       )}

@@ -18,6 +18,8 @@ const Layout = () => {
     <>
       {pathname === "/" && (sm || md) && <Header />}
       {(lg || xl || xxl) && <AccountHeader />}
+      <div className="fixed z-[999] h-screen bg-red-500"></div>
+
       <main className="mb-[5rem] flex grow flex-col lg:relative lg:mb-0 lg:grid lg:w-full lg:grid-cols-[1fr_3fr] xl:grid-cols-[1fr_5fr]">
         {(lg || xl || xxl) && <Sidebar />}
 
