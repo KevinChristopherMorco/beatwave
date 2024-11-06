@@ -16,7 +16,6 @@ const AudioPlayer = () => {
     artist: { name } = "",
     title,
   } = currentAudio;
-  console.log(currentAudio);
 
   return (
     <div className="fixed bottom-0 z-[999] flex flex w-full items-center justify-between border-t border-t-gray-700 bg-[var(--background-color-neutral)] p-3">

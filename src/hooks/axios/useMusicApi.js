@@ -77,25 +77,26 @@ const useMusicApi = () => {
 
   const getSearchResults = async (query) => {
     try {
+      setLoading(true);
+
       // const response = await axios.get(
       //   `https://corsproxy.io/?https://api.deezer.com/search?q=${query}`,
       // );
 
       const artistResponse = await axios.get(
-        `https://corsproxy.io/?https://api.deezer.com/search?q=artist:"${query}"`,
+        `https://corsproxy.io/?https://api.deezer.com/search/artist?q="${query}"`,
       );
 
-      console.log(artistResponse);
+      // const artistPromises = artistResponse.data.data.map(async (data) => {
+      //   const artistId = data.artist.id;
+      //   const artistDetailsResponse = await axios.get(
+      //     `https://corsproxy.io/?https://api.deezer.com/artist/${artistId}`,
+      //   );
+      //   return artistDetailsResponse;
+      // });
 
-      const artistPromises = artistResponse.data.data.map(async (data) => {
-        const artistId = data.artist.id;
-        const artistDetailsResponse = await axios.get(
-          `https://corsproxy.io/?https://api.deezer.com/artist/${artistId}`,
-        );
-        return artistDetailsResponse;
-      });
-
-      const artistDetailsArray = await Promise.all(artistPromises);
+      // const artistDetailsArray = await Promise.all(artistPromises);
+      // console.log(artistDetailsArray);
 
       const trackResponse = await axios.get(
         `https://corsproxy.io/?https://api.deezer.com/search?q=track:"${query}"`,
@@ -106,9 +107,13 @@ const useMusicApi = () => {
 
       const appendData = {
         tracks: trackResponse.data,
-        artist: artistDetailsArray.slice(0, 1),
+        // artist: artistDetailsArray
+        //   .filter((x) => x.data.name.toUpperCase() === `${query.toUpperCase()}`)
+        //   .slice(0, 1),
+        artist: artistResponse.data,
         albums: albumResponse.data,
       };
+      console.log(appendData);
 
       setMusicData(appendData);
       setLoading(false);

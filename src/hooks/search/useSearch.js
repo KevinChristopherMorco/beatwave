@@ -28,9 +28,7 @@ const useSearch = () => {
   useEffect(() => {
     const delaySearch = setTimeout(() => {
       getSearchResults(query);
-    }, 100);
-
-    console.log(musicData);
+    }, 500);
 
     return () => clearTimeout(delaySearch);
   }, [query]);

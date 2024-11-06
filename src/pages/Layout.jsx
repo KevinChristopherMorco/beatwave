@@ -31,8 +31,6 @@ const Layout = () => {
   const isLargeScreen = lg || xl || xxl;
   const isSmallScreen = sm || md;
 
-  console.log(artist);
-
   const SearchView = () => {
     return (
       <div className="z-[999] flex h-full w-full grow flex-col bg-[var(--background-color)] px-4 py-6">
@@ -42,17 +40,15 @@ const Layout = () => {
             <div className="flex flex-col gap-4">
               <p className="text-xl font-bold">Artist</p>
               <div className="flex">
-                {artist?.map((artist, index) => {
-                  const { data } = artist;
-                  console.log(artist);
+                {artist?.data.slice(0, 1).map((artist, index) => {
                   return (
                     <Link
-                      to={`/artist/${data.id}`}
+                      to={`/artist/${artist.id}`}
                       key={index}
                       className="flex w-full items-center gap-2"
                     >
                       <img
-                        src={data.picture_xl}
+                        src={artist.picture_xl}
                         alt=""
                         className="h-[10rem] w-[10rem] rounded-full"
                       />
@@ -60,7 +56,7 @@ const Layout = () => {
                       <div className="flex w-full flex-col py-1">
                         <div className="flex items-center gap-2">
                           <p className="overflow-hidden overflow-ellipsis whitespace-nowrap font-medium">
-                            {data.name}
+                            {artist.name}
                           </p>
                           <RiVerifiedBadgeFill className="h-4 w-4 text-[#1C9CEA]" />
                         </div>
