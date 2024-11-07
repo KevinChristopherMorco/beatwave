@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 import PlayButton from "./buttons/PlayButton";
 
-const FeaturedCard = ({ musicData, type }) => {
+const FeaturedCard = ({ musicData, type, isScroll }) => {
   const { artistID } = useParams();
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -82,7 +82,7 @@ const FeaturedCard = ({ musicData, type }) => {
       {type === "podcasts" && (
         <Link
           to={`/podcast/${musicData.id}`}
-          className="group flex shrink-0 cursor-pointer flex-col items-start gap-4 px-4"
+          className={`${isScroll ? "px-4" : "px-0"} group flex shrink-0 cursor-pointer flex-col items-start gap-4`}
         >
           <div
             className="h-[10rem] w-[10rem] rounded-md border border-gray-800 bg-cover bg-center xl:h-[14rem] xl:w-[14rem]"
@@ -97,7 +97,7 @@ const FeaturedCard = ({ musicData, type }) => {
       {type === "albums" && (
         <Link
           to={`/album/${musicData.id}`}
-          className={`${pathname === `/artist/${artistID}/top-albums` ? "px-0" : "px-4"} group flex shrink-0 cursor-pointer flex-col items-start gap-4 px-4`}
+          className={`${isScroll ? "px-4" : "px-0"} group flex shrink-0 cursor-pointer flex-col items-start gap-4`}
         >
           <div
             className="h-[10rem] w-full rounded-md border border-gray-800 bg-cover bg-center xl:h-[14rem] xl:w-[14rem]"

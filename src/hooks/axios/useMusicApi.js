@@ -79,39 +79,32 @@ const useMusicApi = () => {
     try {
       setLoading(true);
 
-      // const response = await axios.get(
-      //   `https://corsproxy.io/?https://api.deezer.com/search?q=${query}`,
-      // );
-
       const artistResponse = await axios.get(
         `https://corsproxy.io/?https://api.deezer.com/search/artist?q="${query}"`,
       );
 
-      // const artistPromises = artistResponse.data.data.map(async (data) => {
-      //   const artistId = data.artist.id;
-      //   const artistDetailsResponse = await axios.get(
-      //     `https://corsproxy.io/?https://api.deezer.com/artist/${artistId}`,
-      //   );
-      //   return artistDetailsResponse;
-      // });
-
-      // const artistDetailsArray = await Promise.all(artistPromises);
-      // console.log(artistDetailsArray);
-
       const trackResponse = await axios.get(
-        `https://corsproxy.io/?https://api.deezer.com/search?q=track:"${query}"`,
+        `https://corsproxy.io/?https://api.deezer.com/search/track?q="${query}"`,
       );
+
       const albumResponse = await axios.get(
-        `https://corsproxy.io/?https://api.deezer.com/search?q=album:"${query}"`,
+        `https://corsproxy.io/?https://api.deezer.com/search/album?q="${query}"`,
+      );
+
+      const podcastResponse = await axios.get(
+        `https://corsproxy.io/?https://api.deezer.com/search/podcast?q="${query}"`,
+      );
+
+      const similarArtists = await axios.get(
+        `https://corsproxy.io/?https://api.deezer.com/artist/${artistResponse.data.data[0].id}/related`,
       );
 
       const appendData = {
         tracks: trackResponse.data,
-        // artist: artistDetailsArray
-        //   .filter((x) => x.data.name.toUpperCase() === `${query.toUpperCase()}`)
-        //   .slice(0, 1),
         artist: artistResponse.data,
         albums: albumResponse.data,
+        podcasts: podcastResponse.data,
+        similarArtist: similarArtists.data,
       };
       console.log(appendData);
 

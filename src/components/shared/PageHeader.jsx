@@ -5,13 +5,6 @@ import formatFanCount from "../../helpers/format/formatFanCount";
 import BackButton from "./BackButton";
 
 const PageHeader = ({ musicData, type }) => {
-  // const formatFanCount = musicData?.artist?.nb_fan
-  //   ?.toLocaleString()
-  //   .split(",")
-  //   .join(" ");
-
-  const formatFanCounts = formatFanCount(musicData.artist);
-
   return (
     <>
       {type === "artist" && (
@@ -23,7 +16,9 @@ const PageHeader = ({ musicData, type }) => {
               {musicData.artist.name}
             </p>
             {musicData.artist.nb_fan > 0 && (
-              <p className="text-lg font-medium">{formatFanCounts}</p>
+              <p className="text-lg font-medium">
+                {formatFanCount(musicData.artist)}
+              </p>
             )}
           </div>
         </div>

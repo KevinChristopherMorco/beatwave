@@ -2,23 +2,26 @@ import { useEffect, useState } from "react";
 import useMusicApi from "../axios/useMusicApi";
 
 const useSearch = () => {
-  const { musicData, searchData, isLoading, getSearchResults } = useMusicApi();
-  const [artist, setArtist] = useState();
+  const { musicData, isLoading, getSearchResults } = useMusicApi();
   const [query, setQuery] = useState("");
-
-  console.log(query);
+  const [isToggleSearch, setToggleSearch] = useState("");
+  const [isToggleSearchView, setToggleSearchView] = useState("");
 
   const handleSearchQuery = (event) => {
     const { value } = event.target;
     setQuery(value);
   };
 
-  const artistResult = musicData?.data?.filter((item, index, arr) => {
-    return (
-      arr.findIndex((existing) => existing.artist.id === item.artist.id) ===
-      index
-    );
-  });
+  const handleSearchView = (query) => {
+    if (query.length > 0) {
+      setToggleSearchView(true);
+      return;
+    }
+
+    setToggleSearchView(false);
+  };
+
+  const handleSearchToggle = () => setToggleSearch(!toggleSearch);
 
   useEffect(() => {
     if (query.length === 0) return;
@@ -33,7 +36,10 @@ const useSearch = () => {
     query,
     musicData,
     isLoading,
-    artistResult,
+    isToggleSearch,
+    isToggleSearchView,
+    handleSearchToggle,
+    handleSearchView,
     handleSearchQuery,
   };
 };

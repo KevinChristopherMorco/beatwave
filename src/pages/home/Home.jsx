@@ -44,7 +44,11 @@ const Home = () => {
       <FeaturedContainer>
         <MainHeading title={"Hottest Albums"} />
         <ScrollableContainer>
-          <FeatureData musicData={musicData.albums.data} types={"albums"} />
+          <FeatureData
+            musicData={musicData.albums.data}
+            types={"albums"}
+            isScroll={true}
+          />
         </ScrollableContainer>
       </FeaturedContainer>
       <FeaturedContainer>

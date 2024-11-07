@@ -9,6 +9,8 @@ const useScreenResponsiveness = () => {
     xxl: false,
   });
 
+  const { sm, md, lg, xl, xxl } = screenSize;
+
   const handleScreenSize = () => {
     if (window.innerWidth >= 1536) {
       setScreenSize((prev) => ({ ...prev, xxl: true }));
@@ -38,7 +40,11 @@ const useScreenResponsiveness = () => {
     return () => window.removeEventListener("resize", handleScreenSize());
   }, []);
 
-  return { screenSize };
+  return {
+    screenSize,
+    isSmallScreen: sm || md,
+    isLargeScreen: lg || xl || xxl,
+  };
 };
 
 export default useScreenResponsiveness;
