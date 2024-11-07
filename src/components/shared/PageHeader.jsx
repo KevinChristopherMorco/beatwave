@@ -1,12 +1,16 @@
 import React from "react";
 
+import formatFanCount from "../../helpers/format/formatFanCount";
+
 import BackButton from "./BackButton";
 
 const PageHeader = ({ musicData, type }) => {
-  const formatFanCount = musicData?.artist?.nb_fan
-    ?.toLocaleString()
-    .split(",")
-    .join(" ");
+  // const formatFanCount = musicData?.artist?.nb_fan
+  //   ?.toLocaleString()
+  //   .split(",")
+  //   .join(" ");
+
+  const formatFanCounts = formatFanCount(musicData.artist);
 
   return (
     <>
@@ -19,11 +23,7 @@ const PageHeader = ({ musicData, type }) => {
               {musicData.artist.name}
             </p>
             {musicData.artist.nb_fan > 0 && (
-              <p className="text-lg font-medium">
-                {musicData.artist.nb_fan > 1
-                  ? `${formatFanCount} fans`
-                  : `${formatFanCount} fan`}
-              </p>
+              <p className="text-lg font-medium">{formatFanCounts}</p>
             )}
           </div>
         </div>

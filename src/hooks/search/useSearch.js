@@ -6,6 +6,8 @@ const useSearch = () => {
   const [artist, setArtist] = useState();
   const [query, setQuery] = useState("");
 
+  console.log(query);
+
   const handleSearchQuery = (event) => {
     const { value } = event.target;
     setQuery(value);
@@ -18,14 +20,8 @@ const useSearch = () => {
     );
   });
 
-  //   const searchArtistResult = searchData?.data?.filter((item, index, arr) => {
-  //     return (
-  //       arr.findIndex((existing) => existing.artist.id === item.artist.id) ===
-  //       index
-  //     );
-  //   });
-
   useEffect(() => {
+    if (query.length === 0) return;
     const delaySearch = setTimeout(() => {
       getSearchResults(query);
     }, 500);
