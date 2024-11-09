@@ -206,8 +206,8 @@ const SearchView = ({ query, musicData, isLoading, setToggleSearch }) => {
 
               <div className="flex flex-col gap-4">
                 <p className="text-xl font-bold">Similar Artists</p>
-                <div className="flex gap-2">
-                  {similarArtist?.data.slice(0, 5).map((album, index) => {
+                <div className="flex items-center justify-between">
+                  {similarArtist?.data.slice(0, 4).map((album, index) => {
                     return (
                       <FeaturedCard
                         key={index}
