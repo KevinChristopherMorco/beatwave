@@ -21,7 +21,7 @@ const useSearch = () => {
     setToggleSearchView(false);
   };
 
-  const handleSearchToggle = () => setToggleSearch(!toggleSearch);
+  const handleSearchToggle = () => setToggleSearch(!isToggleSearch);
 
   useEffect(() => {
     if (query.length === 0) return;

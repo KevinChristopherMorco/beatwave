@@ -106,7 +106,6 @@ const useMusicApi = () => {
         podcasts: podcastResponse.data,
         similarArtist: similarArtists.data,
       };
-      console.log(appendData);
 
       setMusicData(appendData);
       setLoading(false);
