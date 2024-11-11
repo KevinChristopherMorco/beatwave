@@ -95,16 +95,24 @@ const useMusicApi = () => {
         `https://corsproxy.io/?https://api.deezer.com/search/podcast?q="${query}"`,
       );
 
-      const similarArtists = await axios.get(
-        `https://corsproxy.io/?https://api.deezer.com/artist/${artistResponse.data.data[0].id}/related`,
-      );
+      // const similarArtists = await axios.get(
+      //   `https://corsproxy.io/?https://api.deezer.com/artist/${artistResponse.data.data[0].id}/related`,
+      // );
+
+      let similarArtists = null;
+      if (artistResponse.data.data.length > 0) {
+        const similar = await axios.get(
+          `https://corsproxy.io/?https://api.deezer.com/artist/${artistResponse.data.data[0].id}/related`,
+        );
+        similarArtists = similar.data;
+      }
 
       const appendData = {
         tracks: trackResponse.data,
         artist: artistResponse.data,
         albums: albumResponse.data,
         podcasts: podcastResponse.data,
-        similarArtist: similarArtists.data,
+        similarArtist: similarArtists,
       };
 
       setMusicData(appendData);
